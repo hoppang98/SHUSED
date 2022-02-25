@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class userController {
+public class UserController {
 	
 	// 회원가입 view로 이동
 	@GetMapping("/user/signup_view")

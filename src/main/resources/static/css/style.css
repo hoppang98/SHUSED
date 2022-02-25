@@ -5,3 +5,24 @@
 	height:auto;
 	margin:auto;
 }
+
+#item {
+	position: relative;
+	left:25%;
+}
+
+#join-box{
+	width:35%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#input-item{
+	width:90%;
+}
+
+.duplicate-btn {
+	width:5rem;
+}

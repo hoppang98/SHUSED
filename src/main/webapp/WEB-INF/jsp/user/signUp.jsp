@@ -24,7 +24,213 @@
 </head>
 <body>
 	<div id="wrap">
+		
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+		
+		<section id="join-box">
+			<div class="container mt-3 border">
+			
+				<%-- 로고 --%>
+				<div>
+					<div class="fs-1 fw-bold fst-italic text-center">SHUSED</div>
+					<div class="fst-italic small text-danger text-center">I've never been afraid to fail.</div>
+				</div>
+				
+				<%-- 아이디 --%>
+				<div id="input-item mb-3" class="p-3">
+					<div class="small fw-bold p-1">아이디</div>
+					<div class="d-flex">
+						<input type="text" class="form-control" placeholder="아이디" id="loginIdInput">
+						<button class="btn btn-danger badge duplicate-btn"  id="checkDuplicateIdBtn">id<br>중복체크</button>
+					</div>
+						<small class="text-danger d-none" id="duplicationId">이미 사용 중인 아이디입니다.</small>
+						<small class="text-danger d-none" id="avaliableId">사용가능한 아이디입니다.</small>
+						
+					<div class="small fw-bold p-1 mt-2">비밀번호</div>
+					<input type="text" class="form-control" placeholder="비밀번호" id="passwordInput">
+					<input type="text" class="form-control mt-1" placeholder="비밀번호 확인" id="passwordConfirmInput">
+						<small class="text-danger d-none" id="confirmPassword">비밀번호가 일치하지 않습니다.</small>
+						
+					<div class="small fw-bold p-1 mt-2">닉네임</div>
+					<div class="d-flex">
+						<input type="text" class="form-control" placeholder="닉네임" id="nicknameInput">
+						<button class="btn btn-danger badge duplicate-btn"  id="checkDuplicateNicknameBtn">닉네임<br>중복체크</button>
+					</div>
+						<small class="text-danger d-none" id="duplicationNickname">이미 사용 중인 닉네임입니다.</small>
+						<small class="text-danger d-none" id="avaliableNickname">사용가능한 닉네임입니다.</small>
+						
+					<div class="small fw-bold p-1 mt-2">전화번호</div>
+					<div class="d-flex">
+						<input type="text" class="form-control" placeholder="ex) 010-0000-0000" id="phoneNumberInput">
+						<button class="btn btn-danger badge duplicate-btn"  id="checkDuplicatePhoneNumberBtn">전화번호<br>중복체크</button>
+					</div>
+						<small class="text-danger d-none" id="notCorrectTypePhoneNumber">형식이 일치하지 않습니다.</small>
+						<small class="text-danger d-none" id="duplicationPhoneNumber">이미 사용 중인 전화번호입니다.</small>
+						<small class="text-danger d-none" id="avaliablePhoneNumber">사용가능한 전화번호입니다.</small>
+					
+					<button class="btn btn-info w-100 text-light mt-2" id="joinBtn">회원가입</button>
+					
+					
+					<div class="d-flex align-items-center justify-content-center mt-2">
+						<hr class="w-25"><span class="mx-5 text-secondary">또는</span><hr class="w-25">
+					</div>
+					
+					<div class="d-flex align-items-center justify-content-center small">
+						<span class="me-2 text-secondary">이미 계정이 있으신가요?</span><a href="#">로그인</a>
+					</div>
+					
+			</div>
+		</section>
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			
+			var isDuplicateId = true;
+			var isDuplicateNickname = true;
+			var isDuplicatePhoneNumber = true;
+			var isIdCheck = false;
+			var isNicknameCheck = false;
+			var isPhoneNumberCheck = false;
+			
+			$("#loginIdInput").on("input", function() {
+				$("#DuplicationId").addClass("d-none");
+				$("#availableId").addClass("d-none");
+				$(".checkDuplicateIdBtn").removeClass("btn-info");
+				$(".checkDuplicateIdBtn").addClass("btn-danger");
+				isIdCheck = false;
+				isDuplicateId = true;
+			});
+			
+			$("#nicknameInput").on("input", function() {
+				$("#duplicationNickname").addClass("d-none");
+				$("#availableNickname").addClass("d-none");
+				$(".checkDuplicateNickNameBtn").removeClass("btn-info");
+				$(".checkDuplicateNickNameBtn").addClass("btn-danger");
+				isNicknameCheck = false;
+				isDuplicateNickname = true;
+			});
+			
+			$("#phoneNumberInput").on("input", function() {
+				$("#duplicationPhoneNumber").addClass("d-none");
+				$("#availablePhoneNumber").addClass("d-none");
+				$(".checkDuplicatePhoneNumberBtn").removeClass("btn-info");
+				$(".checkDuplicatePhoneNumberBtn").addClass("btn-danger");
+				isPhoneNumberCheck = false;
+				isDuplicatePhoneNumber = true;
+			});
+			
+			
+			// 전화번호 형식 확인
+            $('#phoneNumberInput').keyup(function(){
+                var phoneNumber = $("#phoneNumberInput").val();
+				console.log(phoneNumber);
+                if (phoneNumber.length == 13) {
+                	//console.log(text.charAt(5)); 추가하기 javascript문법 활용
+                    $('#notCorrectTypePhoneNumber').addClass('d-none');
+                } else {
+                	$('#notCorrectTypePhoneNumber').removeClass('d-none');
+                }
+            });
+            
+        	 // 중복체크를 하고나면 버튼 색상 변경해보기
+        	 
+        	 // id중복체크 버튼
+        	 $("#checkDuplicateIdBtn").on("click",function({
+        		 
+        		 var loginId = $("#loginIdInput").val();
+        		 
+        		 if(loginId == ""){
+ 					alert("아이디를 입력하세요");
+ 					return;
+ 				}
+        		 
+        		 $.ajax({
+        			 type:"get"
+        			 ,url:"/user/is_duplicate_id"
+        			 ,data{"loginId":loginId}
+        		 	 ,success:function(data) {
+        		 		 isIdCheck = true;
+        		 		 
+        		 		if(data.isDuplicate == true) {
+							isDuplicateId = true;
+							$("#DuplicationId").removeClass("d-none");
+							$("#availableId").addClass("d-none");
+							$(".checkDuplicatePhoneNumberBtn").addClass("btn-info");
+						} else {
+							isDuplicateId = false;
+							$("#availableId").removeClass("d-none");
+							$("#DuplicationId").addClass("d-none");
+							$(".checkDuplicatePhoneNumberBtn").addClass("btn-danger");
+						}
+        		 	 }, error:function(){
+        		 		 alert("에러발생");
+        		 	 }
+        		 });
+        	 });
+        	 
+        	 
+        	 
+        	 
+        	 
+			$("#joinBtn").on("click", function(){
+				var loginId = $("#loginIdInput").val();
+				var password = $("#passwordInput").val();
+				var passwordConfirm = $("#passwordConfirmInput").val();
+				var nickname = $("#nicknameInput").val();
+				var phoneNumber = $("#phoneNumberInput").val();
+				
+				if(isIdCheck == false) {
+					alert("id 중복상태를 체크하세요");
+					return;
+				}
+				
+				if(loginId == "") {
+					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				if(password == "") {
+					alert("비밀번호를 입력하세요");
+					return;
+				}
+				
+				if(password != passwordConfirm) {
+					$("#confirmPassword").removeClass("d-none");
+					return;
+				}
+				
+				if(nickname == "") {
+					alert("닉네임을 입력하세요");
+					return;
+				}
+				
+				if(phoneNumber == "") {
+					alert("전화번호를 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"get"
+					,url:"/user/is_duplicate"
+					,data:{"loginId":loginId, "nickname":nickname, "phoneNumber":phoneNumber}
+					,success:function(data){
+						if(data.result == "success") {
+							alert("중복체크 성공");
+						} else {
+							alert("중복된 데이터가 있습니다");
+						} 
+					}, error:function(){
+						alert("에러발생");
+					}
+				});
+			});
+		});
+	
+	
+	
+	
+	
+	</script>
 </body>
 </html>
