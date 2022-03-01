@@ -15,7 +15,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="small"><a href="/user/sign_in" class="text-dark text-decoration-none fw-light me-2">로그인</a></div>
+				<div class="small"><a href="/user/signin_view" class="text-dark text-decoration-none fw-light me-2">로그인</a></div>
 			</c:otherwise>
 		</c:choose>
 		

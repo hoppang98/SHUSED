@@ -85,7 +85,7 @@
 					,success:function(data) {
 						if(data.result == "success"){
 							alert("환영합니다");
-							//location.href="/mainPage_view";
+							location.href="/shoes/mainPage_view";
 						} else {
 							alert("아이디나 비밀번호가 틀렸습니다.");
 						}
