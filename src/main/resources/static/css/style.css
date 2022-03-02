@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 #wrap {
-	width:auto;
-	height:auto;
+	width:1200px;
+	height:800px;
 	margin:auto;
 }
 
@@ -25,4 +25,24 @@
 
 .duplicate-btn {
 	width:5rem;
+}
+
+.logoImage{
+	width:280px;
+	height:200px;
+}
+
+.logoImage-forDropped{
+	width:200px;
+	height:150x;
+}
+
+.main-bigbutton{
+	width:500px;
+	height:100px;
+}
+
+.mainPage-shoes{
+	width:200px;
+	height:200px;
 }

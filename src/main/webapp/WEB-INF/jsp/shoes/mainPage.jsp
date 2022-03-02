@@ -26,6 +26,35 @@
 		
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
+		<!-- 로고 이미지 -->
+		<div class="d-flex justify-content-around align-items-center border-bottom border-info border-3 mt-2">
+			<div class="mb-2">
+				<img src="/static/image/adidas logo.jpg" class="logoImage">
+				<img src="/static/image/jordan logo.png" class="logoImage">
+				<img src="/static/image/new balance logo.png" class="logoImage">
+				<img src="/static/image/nike_logo_thumbnail.png" class="logoImage">
+			</div>
+		</div>
+		
+		<!-- 버튼 -->
+		<div class="d-flex justify-content-around align-items-center my-3">
+			<button type="button" id="sellBtn" class="btn btn-info w-50 me-2 fs-1 fw-bold">SELL</button>
+			<button type="button" id="sellBtn" class="btn btn-info w-50 fs-1 fw-bold">COMMUNITY</button>
+		</div>
+		
+		<!-- 최근 등록 상품 -->
+		<div class="border border-3 rounded">
+			<span class="fw-bold fst-italic">Recently Added</span>
+			<br>
+			<span class="fst-italic">최근 등록 상품</span>
+			<div class="d-flex">
+				<div class="mainPage-shoes bg-secondary m-3"></div>
+				<div class="mainPage-shoes bg-secondary m-3"></div>
+				<div class="mainPage-shoes bg-secondary m-3"></div>
+				<div class="mainPage-shoes bg-secondary m-3"></div>
+				<div class="mainPage-shoes bg-secondary m-3"></div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
