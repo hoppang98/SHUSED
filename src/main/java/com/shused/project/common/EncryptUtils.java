@@ -1,4 +1,4 @@
-package com.shused.project.config;
+package com.shused.project.common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

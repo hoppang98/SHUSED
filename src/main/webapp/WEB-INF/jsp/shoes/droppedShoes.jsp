@@ -36,25 +36,25 @@
 			<!-- 카테고리 선택을 위한 로고 -->
 			<div class="d-flex justify-content-around mb-2 mt-2">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="adidas" checked> 
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="adidas" value="adidas" checked> 
 					<label class="form-check-label" for="adidas"> 
 						<img src="/static/image/adidas logo.jpg" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="jordan"> 
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="jordan" value="jordan"> 
 					<label class="form-check-label" for="jordan"> 
 						<img src="/static/image/jordan logo.png" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="newBalance"> 
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="newBalance" value="newBalance"> 
 					<label class="form-check-label" for="newBalance"> 
 						<img src="/static/image/new balance logo.png" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="nike"> 
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="nike" value="nike"> 
 					<label class="form-check-label" for="nike"> 
 						<img src="/static/image/nike_logo_thumbnail.png" class="logoImage-forDropped">
 					</label>
@@ -63,25 +63,35 @@
 			<hr>
 			
 			
-			<div class="d-flex justify-content-around p-3 ms-5">
+			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>모델번호</span>
-				<input type="text" class="form-control w-75" placeholder="ex) DD1391-100">
+				<input type="text" class="form-control w-75" placeholder="ex) DD1391-100" id="modelNumberInput">
 			</div>
 			
-			<div class="d-flex justify-content-around p-3 ms-5">
+			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>제품명</span>
-				<input type="text" class="form-control w-75" placeholder="ex) Dunk Low Retro Black">
+				<input type="text" class="form-control w-75" placeholder="ex) Dunk Low Retro Black" id="shoesNameInput">
 			</div>
 			
-			<div class="d-flex justify-content-around p-3 ms-5">
+			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>발매일자</span>
-				<input type="text" class="form-control w-75" id="date" name="date" placeholder="ex) 2000년 01월 01일">
+				<input type="text" class="form-control w-75" id="dateInput" name="date" placeholder="ex) 20-01-01">
 			</div>
 			
-			<div class="d-flex justify-content-around p-3 ms-5">
+			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>제품 사진</span>
-				<input type="file" id="fileInput" onchange="setThumbnail(event);"><div id="image_container" class="w-50"></div>
+				<input type="file" id="fileInput" onchange="setThumbnail(event);" id="fileInput">
 			</div>
+			
+			<!-- 썸네일 기능 -->
+			<div class="d-flex justify-content-end">
+				<div id="image_container"></div>
+			</div>
+			
+			<div class="d-flex justify-content-end p-4">
+				<button type="button" class="btn btn-lg btn-outline-secondary" id="recentlyDroppedBtn">등록하기</button>
+			</div>
+			
 		</div>
 	</div>
 	
@@ -94,7 +104,7 @@
 		reader.onload = function(event){
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
-			img.setAttribute("class", "col-lg-4");
+			img.setAttribute("class", "col-lg-8");
 			document.querySelector("div#image_container").appendChild(img);
 		};
 		
@@ -116,10 +126,65 @@
 		        yearSuffix: '년'
 		    });
 		 
-		$('#date').datepicker({
-			dateFormat : "yy년 mm월 dd일", // mysql이 자동으로 날짜로 인식할 수 있는 문자열 형식
+		$('#dateInput').datepicker({
+			dateFormat : 'yy-mm-dd',
 			changeMonth : true,
 			changeYear : true
+		});
+		
+		
+		
+		
+		
+		$("#recentlyDroppedBtn").on("click", function(){
+			
+			let category = $("input[name=flexRadioDefault]:checked").val();
+			console.log(category);
+			let modelNumber = $("#modelNumberInput").val().trim();
+			let shoesName = $("#shoesNameInput").val().trim();
+			let date = $("#dateInput").val();
+			console.log(dateInput);
+			
+			
+			if(modelNumber == "") {
+				alert("제품번호를 입력해주세요");
+			}
+			if(shoesName == "") {
+				alert("제품명을 입력해주세요");
+			}
+			if(dateInput == "") {
+				alert("발매일자를 입력해주세요");
+			}
+			if($("#fileInput")[0].files.length == 0) {	
+				alert("파일을 선택해주세요");
+				return;
+			}
+			
+			var formData = new FormData();
+			formData.append("category", category);
+			formData.append("modelNumber", modelNumber);
+			formData.append("shoesName", shoesName);
+			formData.append("date", date);
+			formData.append("file", $("#fileInput")[0].files[0]);
+			
+			$.ajax({
+				type:"post"
+				,url:"/shoes/dropped_shoes"
+				,data:formData
+				,enctype:"multipart/form-data"
+				,processData:false
+				,contentType:false
+				,success:function(data) {
+					if(data.result == "success") {
+						alert("입력 성공");
+						location.href="/shoes/mainPage_view"
+					} else {
+						alert("입력 실패");
+					}
+				},error:function(){
+					alert("오류 발생");
+				}
+			});
 		});
 	});
 	</script>

@@ -3,7 +3,7 @@ package com.shused.project.user.bo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shused.project.config.EncryptUtils;
+import com.shused.project.common.EncryptUtils;
 import com.shused.project.user.dao.UserDAO;
 import com.shused.project.user.model.User;
 
@@ -15,7 +15,7 @@ public class UserBO {
 	
 	// 회원가입
 	public int addUser(String loginId, String password, String nickname, String phoneNumber) {
-		String encPassword = EncryptUtils.md5(password);
+		String encPassword = EncryptUtils.md5(phoneNumber);
 		
 		return userDAO.insertUser(loginId, encPassword, nickname, phoneNumber);
 	}

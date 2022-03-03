@@ -13,9 +13,9 @@ public class ShoesController {
 	}
 	
 	// 최근 발매 상품 등록 페이지로 이동
-	@GetMapping("/shoes/recentlyDropped_view")
+	@GetMapping("/shoes/droppedShoes_view")
 	public String recentlyDroppedView() {
-		return "/shoes/recentlyDropped";
+		return "/shoes/droppedShoes";
 	}
 	
 }
