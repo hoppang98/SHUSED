@@ -4,7 +4,7 @@
 
 <mapper namespace="com.shused.project.shoes.dao.ShoesDAO">
 	<insert id="insertDroppedShoes" parameterType="map">
-		INSERT INTO `droppedshoes'
+		INSERT INTO `droppedshoes`
 		(
 			`userId`
 			,`nickname`
@@ -27,4 +27,11 @@
 			,now()
 		)
 	</insert>
+	
+	<select id="selectDroppesShoes" resultType="com.shused.project.shoes.model.DroppedShoes">
+		SELECT *
+		FROM
+			`droppedshoes`
+		ORDER BY `createdAt` DESC
+	</select>
 </mapper>

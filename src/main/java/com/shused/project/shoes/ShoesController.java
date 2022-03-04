@@ -1,14 +1,33 @@
 package com.shused.project.shoes;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.shused.project.shoes.bo.ShoesBO;
+import com.shused.project.shoes.model.DroppedShoes;
 
 @Controller
 public class ShoesController {
 	
+	@Autowired
+	private ShoesBO shoesBO;
+	
 	// 메인페이지로 이동
 	@GetMapping("/shoes/mainPage_view")
-	public String signupView() {
+	public String signupView(
+			Model model
+			) {
+		 
+		List<DroppedShoes> DroppedShoesList = shoesBO.getDroppedShoesList();
+		model.addAttribute("DroppedShoesList", DroppedShoesList);
+		
 		return "/shoes/mainPage";
 	}
 	

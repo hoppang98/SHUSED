@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,16 +44,23 @@
 		</div>
 		
 		<!-- 최근 등록 상품 -->
-		<div class="border border-3 rounded">
+		<div class="border border-3 rounded p-2">
 			<span class="fw-bold fst-italic">Recently Added</span>
 			<br>
 			<span class="fst-italic">최근 등록 상품</span>
 			<div class="d-flex">
-				<div class="mainPage-shoes bg-secondary m-3"></div>
-				<div class="mainPage-shoes bg-secondary m-3"></div>
-				<div class="mainPage-shoes bg-secondary m-3"></div>
-				<div class="mainPage-shoes bg-secondary m-3"></div>
-				<div class="mainPage-shoes bg-secondary m-3"></div>
+				<c:forEach var="DroppedShoesList" items="${DroppedShoesList}">
+					<div class="m-3">
+						<img src="${DroppedShoesList.imagePath}" class="droppedShoes-image">
+						<span>${DroppedShoesList.category}</span>
+						<br>
+						<span>${DroppedShoesList.modelNumber}</span>
+						<br>
+						<span>${DroppedShoesList.shoesName}</span>
+						<br>
+						<span>발매일 : </span><fmt:formatDate value="${DroppedShoesList.date}" pattern="yyyy년 MM월 dd일" />
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

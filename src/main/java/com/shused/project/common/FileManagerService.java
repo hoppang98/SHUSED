@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
 	
-	public final static String FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\recentlyDropped images/";
+	public final static String FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\recentlyDroppedImages/";
 	
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	
@@ -40,8 +40,8 @@ public class FileManagerService {
 			return null;
 		}
 		
-		logger.info("/recentlyDropped images/" + directioryName + file.getOriginalFilename());
-		return "/recentlyDropped images/" + directioryName + file.getOriginalFilename();
+		logger.info("/recentlyDroppedImages/" + directioryName + file.getOriginalFilename());
+		return "/recentlyDroppedImages/" + directioryName + file.getOriginalFilename();
 	}
 	
 	
@@ -55,7 +55,7 @@ public class FileManagerService {
 			return;
 		}
 
-		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/recentlyDropped images/", "");
+		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/recentlyDroppedImages/", "");
 
 		Path path = Paths.get(realFilePath);
 
