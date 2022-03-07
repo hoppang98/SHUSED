@@ -46,3 +46,13 @@
 	width:200px;
 	height:200px;
 }
+
+.scroll-wrap{
+	white-space:nowrap;
+	overflow-x:auto;
+}
+
+
+.scroll-element{
+	display:inline-block;
+}

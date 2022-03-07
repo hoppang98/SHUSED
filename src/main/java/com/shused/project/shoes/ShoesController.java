@@ -37,4 +37,11 @@ public class ShoesController {
 		return "/shoes/droppedShoes";
 	}
 	
+	
+	// 판매 상품 등록 페이지로 이동
+	@GetMapping("/shoes/usedShoes_view")
+	public String usedShoesView() {
+		return "/shoes/usedShoes";
+	}
+	
 }

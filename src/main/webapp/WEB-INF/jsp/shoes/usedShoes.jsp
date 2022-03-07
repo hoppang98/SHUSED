@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,16 +13,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 <%-- jquery --%>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>  
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+ 
 <%-- bootstrap icon--%>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
 <%-- css파일 --%>
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-<title>SHUSED 최근 발매 상품 등록</title>
+<title>SHUSED 판매 물품 등록</title>
 </head>
 <body>
 	<div id="wrap">
@@ -74,10 +73,65 @@
 			</div>
 			
 			<div class="d-flex justify-content-between p-3 ms-5">
-				<span>발매일자</span>
-				<input type="text" class="form-control w-75" id="dateInput" name="date" placeholder="ex) 20-01-01">
+				<span>사이즈</span>
+				<select class="form-select w-75" aria-label="Default select example">
+					<option selected>사이즈 선택</option>
+					<option value="230">230</option>
+					<option value="235">235</option>
+					<option value="240">245</option>
+					<option value="245">245</option>
+					<option value="250">250</option>
+					<option value="255">255</option>
+					<option value="260">260</option>
+					<option value="265">265</option>
+					<option value="270">270</option>
+					<option value="275">275</option>
+					<option value="280">280</option>
+					<option value="285">285</option>
+					<option value="290">290</option>
+					<option value="295">295</option>
+					<option value="300">300</option>
+				</select>
 			</div>
 			
+			<div class="d-flex justify-content-between p-3 ms-5">
+				<span>가격</span>
+				<div class="w-75 d-flex">
+					<input type="text" class="form-control w-75" placeholder="숫자만 입력해주세요" id="shoesPriceInput">
+					<div class="col-1 d-flex justify-content-center align-items-center">
+						<span class="text-center">원</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-between p-3 ms-5">
+				<span>상태</span>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="new" checked> 
+					<label class="form-check-label" for="new">
+					 	새 것 
+					 </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="almostNew"> 
+					<label class="form-check-label" for="almostNew">
+						거의 새 것 
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="normal"> 
+					<label class="form-check-label" for="normal"> 
+						보통 
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="bad"> 
+					<label class="form-check-label" for="bad"> 
+						나쁨 
+					</label>
+				</div>
+			</div>
+
 			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>제품 사진</span>
 				<input type="file" id="fileInput" onchange="setThumbnail(event);" id="fileInput">
@@ -94,101 +148,5 @@
 			
 		</div>
 	</div>
-	
-	
-	<script>
-	
-	function setThumbnail(event){
-		var reader = new FileReader();
-		
-		reader.onload = function(event){
-			var img = document.createElement("img");
-			img.setAttribute("src", event.target.result);
-			img.setAttribute("class", "col-lg-8");
-			document.querySelector("div#image_container").appendChild(img);
-		};
-		
-		reader.readAsDataURL(event.target.files[0]);
-	}
-	
-	$(document).ready(function() {
-		
-		 $.datepicker.setDefaults({
-		        dateFormat: 'yy-mm-dd',
-		        prevText: '이전 달',
-		        nextText: '다음 달',
-		        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-		        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-		        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-		        showMonthAfterYear: true,
-		        yearSuffix: '년'
-		    });
-		 
-		$('#dateInput').datepicker({
-			dateFormat : 'yy-mm-dd',
-			changeMonth : true,
-			changeYear : true
-		});
-		
-		
-		
-		
-		
-		$("#recentlyDroppedBtn").on("click", function(){
-			
-			let category = $("input[name=flexRadioDefault]:checked").val();
-			console.log(category);
-			let modelNumber = $("#modelNumberInput").val().trim();
-			let shoesName = $("#shoesNameInput").val().trim();
-			let date = $("#dateInput").val();
-			console.log(dateInput);
-			
-			
-			if(modelNumber == "") {
-				alert("제품번호를 입력해주세요");
-			}
-			if(shoesName == "") {
-				alert("제품명을 입력해주세요");
-			}
-			if(dateInput == "") {
-				alert("발매일자를 입력해주세요");
-			}
-			if($("#fileInput")[0].files.length == 0) {	
-				alert("파일을 선택해주세요");
-				return;
-			}
-			
-			var formData = new FormData();
-			formData.append("category", category);
-			formData.append("modelNumber", modelNumber);
-			formData.append("shoesName", shoesName);
-			formData.append("date", date);
-			formData.append("file", $("#fileInput")[0].files[0]);
-			
-			$.ajax({
-				type:"post"
-				,url:"/shoes/dropped_shoes"
-				,data:formData
-				,enctype:"multipart/form-data"
-				,processData:false
-				,contentType:false
-				,success:function(data) {
-					if(data.result == "success") {
-						alert("입력 성공");
-						location.href="/shoes/mainPage_view"
-					} else {
-						alert("입력 실패");
-					}
-				},error:function(){
-					alert("오류 발생");
-				}
-			});
-		});
-	});
-	</script>
 </body>
 </html>
-
-

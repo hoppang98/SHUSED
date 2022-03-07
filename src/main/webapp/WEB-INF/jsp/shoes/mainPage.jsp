@@ -48,10 +48,12 @@
 			<span class="fw-bold fst-italic">Recently Added</span>
 			<br>
 			<span class="fst-italic">최근 등록 상품</span>
-			<div class="d-flex">
+			<div class="scroll-wrap">
+			<div class="d-flex scroll-element">
 				<c:forEach var="DroppedShoesList" items="${DroppedShoesList}">
 					<div class="m-3">
 						<img src="${DroppedShoesList.imagePath}" class="droppedShoes-image">
+						<br>
 						<span>${DroppedShoesList.category}</span>
 						<br>
 						<span>${DroppedShoesList.modelNumber}</span>
@@ -61,6 +63,7 @@
 						<span>발매일 : </span><fmt:formatDate value="${DroppedShoesList.date}" pattern="yyyy년 MM월 dd일" />
 					</div>
 				</c:forEach>
+			</div>
 			</div>
 		</div>
 	</div>
