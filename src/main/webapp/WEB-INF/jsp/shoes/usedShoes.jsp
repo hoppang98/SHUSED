@@ -110,7 +110,7 @@
 				<span>상태</span>
 				<div class="w-75">
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="condition" id="new" value="new"> 
+						<input class="form-check-input" type="radio" name="condition" id="new" value="new" checked> 
 						<label class="form-check-label" for="new">
 						 	새 것 
 						 </label>
@@ -142,14 +142,14 @@
 				<span>거래방식</span>
 				<div class="w-75">
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="dealMethod" id="direct" value="direct"> 
+						<input class="form-check-input" type="radio" name="dealMethod" id="dealMethod" value="direct"> 
 						<label class="form-check-label" for="direct">
 						 	직거래
 						 	<input type="text" class="form-control w-75 d-none" placeholder="ex) 서울 강남구" id="locationInput">
 						 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="dealMethod" id="post" value="post"> 
+						<input class="form-check-input" type="radio" name="dealMethod" id="dealMethod" value="post"> 
 						<label class="form-check-label" for="post">
 							택배거래
 						</label>
@@ -209,9 +209,16 @@
 
 	$(document).ready(function() {
 		
-		$("#dealMethod").on("click", function() {
-			$("#locationInput").removeClass("d-none");
+		$("#dealMethod").on("click", function(){
+			let dealMethod = $("input[name=dealMethod]:checked").val();
+			if(dealMethod == "direct") {
+				$("#locationInput").removeClass("d-none");
+			} else {
+				$("#locationInput").addClass("d-none");
+			}
 		});
+		
+		
 		
 		
 		$("#usedShoesBtn").on("click", function(){
