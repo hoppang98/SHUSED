@@ -36,25 +36,25 @@
 			<!-- 카테고리 선택을 위한 로고 -->
 			<div class="d-flex justify-content-around mb-2 mt-2">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="adidas" value="adidas" checked> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="adidas" value="adidas" checked> 
 					<label class="form-check-label" for="adidas"> 
 						<img src="/static/image/adidas logo.jpg" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="jordan" value="jordan"> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="jordan" value="jordan"> 
 					<label class="form-check-label" for="jordan"> 
 						<img src="/static/image/jordan logo.png" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="newBalance" value="newBalance"> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="newBalance" value="newBalance"> 
 					<label class="form-check-label" for="newBalance"> 
 						<img src="/static/image/new balance logo.png" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="nike" value="nike"> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="nike" value="nike"> 
 					<label class="form-check-label" for="nike"> 
 						<img src="/static/image/nike_logo_thumbnail.png" class="logoImage-forDropped">
 					</label>
@@ -97,7 +97,6 @@
 	
 	
 	<script>
-	
 	function setThumbnail(event){
 		var reader = new FileReader();
 		
@@ -138,7 +137,7 @@
 		
 		$("#recentlyDroppedBtn").on("click", function(){
 			
-			let category = $("input[name=flexRadioDefault]:checked").val();
+			let category = $("input[name=categoryInput]:checked").val();
 			console.log(category);
 			let modelNumber = $("#modelNumberInput").val().trim();
 			let shoesName = $("#shoesNameInput").val().trim();

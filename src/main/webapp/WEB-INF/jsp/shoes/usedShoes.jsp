@@ -35,25 +35,25 @@
 			<!-- 카테고리 선택을 위한 로고 -->
 			<div class="d-flex justify-content-around mb-2 mt-2">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="adidas" value="adidas" checked> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="adidas" value="adidas"> 
 					<label class="form-check-label" for="adidas"> 
 						<img src="/static/image/adidas logo.jpg" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="jordan" value="jordan"> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="jordan" value="jordan"> 
 					<label class="form-check-label" for="jordan"> 
 						<img src="/static/image/jordan logo.png" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="newBalance" value="newBalance"> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="newBalance" value="newBalance"> 
 					<label class="form-check-label" for="newBalance"> 
 						<img src="/static/image/new balance logo.png" class="logoImage-forDropped me-4">
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="nike" value="nike"> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="nike" value="nike"> 
 					<label class="form-check-label" for="nike"> 
 						<img src="/static/image/nike_logo_thumbnail.png" class="logoImage-forDropped">
 					</label>
@@ -74,7 +74,8 @@
 			
 			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>사이즈</span>
-				<select class="form-select w-75" aria-label="Default select example">
+				<div class="input-label w-75">
+				<select class="form-select" id="sizeInput">
 					<option selected>사이즈 선택</option>
 					<option value="230">230</option>
 					<option value="235">235</option>
@@ -92,6 +93,7 @@
 					<option value="295">295</option>
 					<option value="300">300</option>
 				</select>
+				</div>
 			</div>
 			
 			<div class="d-flex justify-content-between p-3 ms-5">
@@ -106,47 +108,183 @@
 
 			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>상태</span>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="new" checked> 
-					<label class="form-check-label" for="new">
-					 	새 것 
-					 </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="almostNew"> 
-					<label class="form-check-label" for="almostNew">
-						거의 새 것 
-					</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="normal"> 
-					<label class="form-check-label" for="normal"> 
-						보통 
-					</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="bad"> 
-					<label class="form-check-label" for="bad"> 
-						나쁨 
-					</label>
+				<div class="w-75">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="condition" id="new" value="new"> 
+						<label class="form-check-label" for="new">
+						 	새 것 
+						 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="condition" id="almostNew" value="almostNew"> 
+						<label class="form-check-label" for="almostNew">
+							거의 새 것 
+						</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="condition" id="normal" value="normal"> 
+						<label class="form-check-label" for="normal"> 
+							보통 
+						</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="condition" id="bad" value="bad"> 
+						<label class="form-check-label" for="bad"> 
+							나쁨 
+						</label>
+					</div>
 				</div>
 			</div>
 
+
+
 			<div class="d-flex justify-content-between p-3 ms-5">
-				<span>제품 사진</span>
-				<input type="file" id="fileInput" onchange="setThumbnail(event);" id="fileInput">
+				<span>거래방식</span>
+				<div class="w-75">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="dealMethod" id="direct" value="direct"> 
+						<label class="form-check-label" for="direct">
+						 	직거래
+						 	<input type="text" class="form-control w-75 d-none" placeholder="ex) 서울 강남구" id="locationInput">
+						 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="dealMethod" id="post" value="post"> 
+						<label class="form-check-label" for="post">
+							택배거래
+						</label>
+					</div>
+				</div>
 			</div>
-			
-			<!-- 썸네일 기능 -->
-			<div class="d-flex justify-content-end">
-				<div id="image_container"></div>
+
+
+
+
+
+			<div class="d-flex justify-content-between p-3 ms-5">
+				<span>제품설명</span>
+				<textarea class="form-control w-75" rows="10" id="explanationInput" placeholder="ex) 상품 설명을 입력해주세요. (10글자 이상) ex) 구입 시기, 착용 횟수"></textarea>
 			</div>
-			
+
+
+
+			<div class="d-flex justify-content-between p-3 ms-5">
+				<span>제품사진</span>
+				<div class="d-flex justify-content-end">
+					<input class="form-control form-control-user" type="file" multiple="multiple" name="product_detail_image" id="product_detail_image" onchange="setDetailImage(event);">
+				</div>
+			</div>
+			<div id="images_container"></div>
+
+
+
+
+
+
 			<div class="d-flex justify-content-end p-4">
-				<button type="button" class="btn btn-lg btn-outline-secondary" id="recentlyDroppedBtn">등록하기</button>
+				<button type="button" class="btn btn-lg btn-outline-secondary" id="usedShoesBtn">등록하기</button>
 			</div>
 			
 		</div>
 	</div>
+	
+	<script>
+	
+	function setDetailImage(event){
+		for(var image of event.target.files){
+			var reader = new FileReader();
+			
+			reader.onload = function(event){
+				var img = document.createElement("img");
+				img.setAttribute("src", event.target.result);
+				img.setAttribute("class", "col-lg-4");
+				document.querySelector("div#images_container").appendChild(img);
+			};
+			
+			console.log(image);
+			reader.readAsDataURL(image);
+		}
+	}
+
+
+	$(document).ready(function() {
+		
+		$("#dealMethod").on("click", function() {
+			$("#locationInput").removeClass("d-none");
+		});
+		
+		
+		$("#usedShoesBtn").on("click", function(){
+			let category = $("input[name=categoryInput]:checked").val();
+			let modelNumber = $("#modelNumberInput").val().trim();
+			let shoesName = $("#shoesNameInput").val().trim();
+			let size = $("#sizeInput").val().trim();
+			let price = $("#shoesPriceInput").val().trim();
+			let condition = $("input[name=condition]:checked").val();
+			let explanation = $("#explanationInput").val();
+			let location = $("#locationInput").val();
+			
+			if(category == "") {
+				alert("카테고리를 선택해주세요");
+			}
+			if(modelNumber == "") {
+				alert("제품번호를 입력해주세요");
+			}
+			if(shoesName == "") {
+				alert("제품명을 입력해주세요");
+			}
+			if(dateInput == "") {
+				alert("발매일자를 입력해주세요");
+			}
+			if(size == "") {
+				alert("사이즈를 선택해주세요");
+			}
+			if(price == "") {
+				alert("가격을 입력해주세요");
+			}
+			if(condition == "") {
+				alert("상태를 선택해주세요");
+			}
+			if(explanation == "") {
+				alert("제품설명를 입력해주세요");
+			}
+			if($("#fileInput")[0].files.length == 0) {	
+				alert("파일을 선택해주세요");
+				return;
+			}
+			
+			var formData = new FormData();
+			formData.append("category", category);
+			formData.append("modelNumber", modelNumber);
+			formData.append("size", size);
+			formData.append("price", price);
+			formData.append("condition", condition);
+			formData.append("explanation", explanation);
+			formData.append("location", location);
+			formData.append("file", $("#fileInput")[0].files[0]);
+			
+			$.ajax({
+				type:"post"
+				,url:"/shoes/usedShoes"
+				,data:formData
+				,enctype:"multipart/form-data"
+				,processData:false
+				,contentType:false
+				,success:function(data) {
+					if(data.result == "success") {
+						alert("입력 성공");
+						location.href="/shoes/mainPage_view"
+					} else {
+						alert("입력 실패");
+					}
+				},error:function(){
+					alert("오류 발생");
+				}
+			});
+		});
+	});
+	
+	
+	</script>
 </body>
 </html>
