@@ -34,4 +34,43 @@
 			`droppedshoes`
 		ORDER BY `createdAt` DESC
 	</select>
+	
+	<insert id="insertUsedShoes" parameterType="map">
+			INSERT INTO `usedshoes`
+		(
+			`userId`
+			,`nickname`
+			,`phoneNumber`
+			,`category`
+			,`modelNumber`
+			,`shoesName`
+			,`size`
+			,`price`
+			,`condition`
+			,`dealMethod`
+			,`location`
+			,`explanation`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES 
+		(
+			#{userId}
+			,#{nickname}
+			,#{phoneNumber}
+			,#{category}
+			,#{modelNumber}
+			,#{shoesName}
+			,#{size}
+			,#{price}
+			,#{condition}
+			,#{dealMethod}
+			,#{location}
+			,#{explanation}
+			,#{imagePath}
+			,now()
+			,now()
+		)
+	</insert>
 </mapper>

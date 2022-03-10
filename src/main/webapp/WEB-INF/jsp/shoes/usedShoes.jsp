@@ -142,14 +142,14 @@
 				<span>거래방식</span>
 				<div class="w-75">
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="dealMethod" id="dealMethod" value="direct"> 
+						<input class="form-check-input" type="radio" name="dealMethod" id="direct" value="direct"> 
 						<label class="form-check-label" for="direct">
 						 	직거래
 						 	<input type="text" class="form-control w-75 d-none" placeholder="ex) 서울 강남구" id="locationInput">
 						 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="dealMethod" id="dealMethod" value="post"> 
+						<input class="form-check-input" type="radio" name="dealMethod" id="post" value="post"> 
 						<label class="form-check-label" for="post">
 							택배거래
 						</label>
@@ -171,7 +171,7 @@
 			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>제품사진</span>
 				<div class="d-flex justify-content-end">
-					<input class="form-control form-control-user" type="file" multiple="multiple" name="product_detail_image" id="product_detail_image" onchange="setDetailImage(event);">
+					<input class="form-control form-control-user" type="file" multiple="multiple" name="fileInput" id="fileInput" onchange="setDetailImage(event);">
 				</div>
 			</div>
 			<div id="images_container"></div>
@@ -209,7 +209,7 @@
 
 	$(document).ready(function() {
 		
-		$("#dealMethod").on("click", function(){
+		$("[name=dealMethod]").on("click", function(){
 			let dealMethod = $("input[name=dealMethod]:checked").val();
 			if(dealMethod == "direct") {
 				$("#locationInput").removeClass("d-none");
@@ -228,6 +228,7 @@
 			let size = $("#sizeInput").val().trim();
 			let price = $("#shoesPriceInput").val().trim();
 			let condition = $("input[name=condition]:checked").val();
+			let dealMethod = $("input[name=dealMethod]:checked").val();
 			let explanation = $("#explanationInput").val();
 			let location = $("#locationInput").val();
 			
@@ -239,9 +240,6 @@
 			}
 			if(shoesName == "") {
 				alert("제품명을 입력해주세요");
-			}
-			if(dateInput == "") {
-				alert("발매일자를 입력해주세요");
 			}
 			if(size == "") {
 				alert("사이즈를 선택해주세요");
@@ -263,9 +261,11 @@
 			var formData = new FormData();
 			formData.append("category", category);
 			formData.append("modelNumber", modelNumber);
+			formData.append("shoesName", shoesName);
 			formData.append("size", size);
 			formData.append("price", price);
 			formData.append("condition", condition);
+			formData.append("dealMethod", dealMethod);
 			formData.append("explanation", explanation);
 			formData.append("location", location);
 			formData.append("file", $("#fileInput")[0].files[0]);

@@ -24,4 +24,10 @@ public class ShoesBO {
 	public List<DroppedShoes> getDroppedShoesList() {
 		return shoesDAO.selectDroppesShoes();
 	}
+	
+	
+	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, String location, MultipartFile file) {
+		String filePath = FileManagerService.saveFile(userId, file);
+		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, location, filePath);
+	}
 }

@@ -39,9 +39,35 @@
 		
 		<!-- 버튼 -->
 		<div class="d-flex justify-content-around align-items-center my-3">
-			<button type="button" id="sellBtn" class="btn btn-info w-50 me-2 fs-1 fw-bold">SELL</button>
-			<button type="button" id="sellBtn" class="btn btn-info w-50 fs-1 fw-bold">COMMUNITY</button>
+			<button type="button" id="sellBtn" class="btn btn-info w-50 me-2 fs-1 fw-bold"><a href="/shoes/usedShoes_view">SELL</a></button>
+			<button type="button" id="communityBtn" class="btn btn-info w-50 fs-1 fw-bold">COMMUNITY</button>
 		</div>
+		
+		
+		<!-- 최근 발매 상품 -->
+		<div class="border border-3 rounded p-2">
+			<span class="fw-bold fst-italic">Just Dropped</span>
+			<br>
+			<span class="fst-italic">최근 발매 상품</span>
+			<div class="scroll-wrap">
+			<div class="d-flex scroll-element">
+				<c:forEach var="DroppedShoesList" items="${DroppedShoesList}">
+					<div class="m-3">
+						<img src="${DroppedShoesList.imagePath}" class="droppedShoes-image">
+						<br>
+						<span>${DroppedShoesList.category}</span>
+						<br>
+						<span>${DroppedShoesList.modelNumber}</span>
+						<br>
+						<span>${DroppedShoesList.shoesName}</span>
+						<br>
+						<span>발매일 : </span><fmt:formatDate value="${DroppedShoesList.date}" pattern="yyyy년 MM월 dd일" />
+					</div>
+				</c:forEach>
+			</div>
+			</div>
+		</div>
+		<hr>
 		
 		<!-- 최근 등록 상품 -->
 		<div class="border border-3 rounded p-2">
