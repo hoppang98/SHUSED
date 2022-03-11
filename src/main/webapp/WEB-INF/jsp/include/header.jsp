@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header class="d-flex align-items-center justify-content-between border-bottom border-info border-3">
-	<p class="fs-1 p-2 fw-bold fst-italic">SHUSED</p>
+	<p class="fs-1 p-2 fw-bold fst-italic"><a href="/shoes/mainPage_view">SHUSED</a></p>
 	<div>
 	
 		<c:choose>

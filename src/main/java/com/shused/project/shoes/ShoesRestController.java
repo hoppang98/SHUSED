@@ -20,7 +20,7 @@ public class ShoesRestController {
 	@Autowired
 	private ShoesBO shoesBO;
 	
-	// 최근 발매 상품 api
+	// 최근 발매 상품 저장 api
 	@PostMapping("/shoes/dropped_shoes")
 	public Map<String, String> DroppedShoes (
 			@RequestParam("category") String category,
@@ -46,7 +46,7 @@ public class ShoesRestController {
 		return result;
 	}
 	
-	// 최근 등록 상품 api
+	// 최근 등록 상품 저장 api
 	@PostMapping("/shoes/usedShoes")
 	public Map<String, String> usedShoes (
 			@RequestParam("category") String category,

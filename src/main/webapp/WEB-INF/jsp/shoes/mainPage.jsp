@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -44,6 +45,63 @@
 		</div>
 		
 		
+		<!-- 최근 등록 상품 -->
+		<div class="border border-3 rounded p-2">
+			<span class="fw-bold fst-italic">Recently Added</span>
+			<br>
+			<span class="fst-italic">최근 등록 상품</span>
+			<div class="scroll-wrap">
+			<div class="d-flex scroll-element">
+				<c:forEach var="UsedShoesList" items="${UsedShoesList}">
+					<div class="m-3">
+						<img src="${UsedShoesList.imagePath}" class="droppedShoes-image">
+						<br>
+						<span>${UsedShoesList.category}</span>
+						<br>
+						<span>${UsedShoesList.shoesName}</span>
+						<br>
+						<span>사이즈 : ${UsedShoesList.size}</span>
+						<br>
+						
+						<span>상태 : </span>
+						<c:choose>
+							<c:when test="${UsedShoesList.condition eq 'new'}">
+								새 것
+							</c:when>
+							<c:when test="${UsedShoesList.condition eq 'almostNew'}">
+								거의 새 것
+							</c:when>
+							<c:when test="${UsedShoesList.condition eq 'normal'}">
+								보통
+							</c:when>
+							<c:when test="${UsedShoesList.condition eq 'bad'}">
+								나쁨
+							</c:when>
+						</c:choose>
+						<br>
+						
+						<span>판매가 : ${UsedShoesList.price}원</span>
+						<br>
+						
+						<span>거래방식 : </span>
+						<c:choose>
+							<c:when test="${UsedShoesList.dealMethod eq 'post'}">
+								택배거래
+							</c:when>
+							<c:otherwise>
+								직거래
+							</c:otherwise>
+						</c:choose>
+						<br>
+					</div>
+				</c:forEach>
+			</div>
+			</div>
+		</div>
+		
+		<hr>
+		
+		
 		<!-- 최근 발매 상품 -->
 		<div class="border border-3 rounded p-2">
 			<span class="fw-bold fst-italic">Just Dropped</span>
@@ -67,31 +125,9 @@
 			</div>
 			</div>
 		</div>
-		<hr>
 		
-		<!-- 최근 등록 상품 -->
-		<div class="border border-3 rounded p-2">
-			<span class="fw-bold fst-italic">Recently Added</span>
-			<br>
-			<span class="fst-italic">최근 등록 상품</span>
-			<div class="scroll-wrap">
-			<div class="d-flex scroll-element">
-				<c:forEach var="DroppedShoesList" items="${DroppedShoesList}">
-					<div class="m-3">
-						<img src="${DroppedShoesList.imagePath}" class="droppedShoes-image">
-						<br>
-						<span>${DroppedShoesList.category}</span>
-						<br>
-						<span>${DroppedShoesList.modelNumber}</span>
-						<br>
-						<span>${DroppedShoesList.shoesName}</span>
-						<br>
-						<span>발매일 : </span><fmt:formatDate value="${DroppedShoesList.date}" pattern="yyyy년 MM월 dd일" />
-					</div>
-				</c:forEach>
-			</div>
-			</div>
-		</div>
+		
+
 	</div>
 </body>
 </html>

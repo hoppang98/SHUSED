@@ -73,4 +73,11 @@
 			,now()
 		)
 	</insert>
+	
+	<select id="selectUsedShoes" resultType="com.shused.project.shoes.model.UsedShoes">
+		SELECT *
+		FROM
+			`usedshoes`
+		ORDER BY `updatedAt` DESC
+	</select>
 </mapper>

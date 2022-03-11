@@ -20,7 +20,11 @@ public class WebMVCConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/recentlyDroppedImages/**") // 클라이언트에서 접근하도록 하는 path
-		.addResourceLocations("file:///" + FileManagerService.FILE_UPLOAD_PATH); // FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+		.addResourceLocations("file:///" + FileManagerService.RECTNTLY_DROPPED_FILE_UPLOAD_PATH); // RECTNTLY_DROPPED_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+		registry.addResourceHandler("/usedShoesImages/**") // 클라이언트에서 접근하도록 하는 path
+		.addResourceLocations("file:///" + FileManagerService.USED_SHOES_FILE_UPLOAD_PATH); // USED_SHOES_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+		registry.addResourceHandler("/communityImages/**") // 클라이언트에서 접근하도록 하는 path
+		.addResourceLocations("file:///" + FileManagerService.COMMUNITY_FILE_UPLOAD_PATH); // COMMUNITY_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
 	}
 	
 	// 비 로그인시 메모 리스트에 접근 못하게 설정, 로그인시 로그인,회원가입 화면에 접근 못하도록 설정 - interceptor사용으로 모든 페이지가 interceptor를 거쳐가게 한다.

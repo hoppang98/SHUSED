@@ -234,24 +234,31 @@
 			
 			if(category == "") {
 				alert("카테고리를 선택해주세요");
+				return;
 			}
 			if(modelNumber == "") {
-				alert("제품번호를 입력해주세요");
+				alert("모델번호를 입력해주세요");
+				return;
 			}
 			if(shoesName == "") {
 				alert("제품명을 입력해주세요");
+				return;
 			}
 			if(size == "") {
 				alert("사이즈를 선택해주세요");
+				return;
 			}
 			if(price == "") {
 				alert("가격을 입력해주세요");
+				return;
 			}
 			if(condition == "") {
 				alert("상태를 선택해주세요");
+				return;
 			}
 			if(explanation == "") {
 				alert("제품설명를 입력해주세요");
+				return;
 			}
 			if($("#fileInput")[0].files.length == 0) {	
 				alert("파일을 선택해주세요");
@@ -280,11 +287,11 @@
 				,success:function(data) {
 					if(data.result == "success") {
 						alert("입력 성공");
-						location.href="/shoes/mainPage_view"
+						location.href="/shoes/mainPage_view";
 					} else {
 						alert("입력 실패");
 					}
-				},error:function(){
+				}, error:function(){
 					alert("오류 발생");
 				}
 			});

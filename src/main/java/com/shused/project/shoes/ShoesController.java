@@ -2,9 +2,6 @@ package com.shused.project.shoes;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.shused.project.shoes.bo.ShoesBO;
 import com.shused.project.shoes.model.DroppedShoes;
+import com.shused.project.shoes.model.UsedShoes;
 
 @Controller
 public class ShoesController {
@@ -27,6 +25,9 @@ public class ShoesController {
 		 
 		List<DroppedShoes> DroppedShoesList = shoesBO.getDroppedShoesList();
 		model.addAttribute("DroppedShoesList", DroppedShoesList);
+		
+		List<UsedShoes> UsedShoesList = shoesBO.getUsedShoesList();
+		model.addAttribute("UsedShoesList", UsedShoesList);
 		
 		return "/shoes/mainPage";
 	}
