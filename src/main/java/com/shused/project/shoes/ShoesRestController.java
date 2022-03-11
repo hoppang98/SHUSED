@@ -57,7 +57,7 @@ public class ShoesRestController {
 			@RequestParam("condition") String condition,
 			@RequestParam("dealMethod") String dealMethod,
 			@RequestParam("explanation") String explanation,
-			@RequestParam("location") String location,
+			@RequestParam("place") String place,
 			@RequestParam("file") MultipartFile file,
 			HttpServletRequest request
 			){
@@ -67,7 +67,7 @@ public class ShoesRestController {
 		String nickname = (String)session.getAttribute("nickname");
 		String phoneNumber = (String)session.getAttribute("phoneNumber");
 		
-		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, location, file);
+		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, place, file);
 		
 		Map<String, String> result = new HashMap<>();
 		if(count == 1) {

@@ -145,7 +145,7 @@
 						<input class="form-check-input" type="radio" name="dealMethod" id="direct" value="direct"> 
 						<label class="form-check-label" for="direct">
 						 	직거래
-						 	<input type="text" class="form-control w-75 d-none" placeholder="ex) 서울 강남구" id="locationInput">
+						 	<input type="text" class="form-control w-75 d-none" placeholder="ex) 서울 강남구" id="placeInput">
 						 </label>
 					</div>
 					<div class="form-check">
@@ -212,9 +212,9 @@
 		$("[name=dealMethod]").on("click", function(){
 			let dealMethod = $("input[name=dealMethod]:checked").val();
 			if(dealMethod == "direct") {
-				$("#locationInput").removeClass("d-none");
+				$("#placeInput").removeClass("d-none");
 			} else {
-				$("#locationInput").addClass("d-none");
+				$("#placeInput").addClass("d-none");
 			}
 		});
 		
@@ -230,9 +230,9 @@
 			let condition = $("input[name=condition]:checked").val();
 			let dealMethod = $("input[name=dealMethod]:checked").val();
 			let explanation = $("#explanationInput").val();
-			let location = $("#locationInput").val();
+			let place = $("#placeInput").val();
 			
-			if(category == "") {
+			if(category == "" || category == null) {
 				alert("카테고리를 선택해주세요");
 				return;
 			}
@@ -274,7 +274,7 @@
 			formData.append("condition", condition);
 			formData.append("dealMethod", dealMethod);
 			formData.append("explanation", explanation);
-			formData.append("location", location);
+			formData.append("place", place);
 			formData.append("file", $("#fileInput")[0].files[0]);
 			
 			$.ajax({

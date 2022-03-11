@@ -42,7 +42,7 @@
 	height:100px;
 }
 
-.droppedShoes-image{
+.mainPageShoes-image{
 	width:200px;
 	height:200px;
 }
@@ -51,7 +51,6 @@
 	white-space:nowrap;
 	overflow-x:auto;
 }
-
 
 .scroll-element{
 	display:inline-block;

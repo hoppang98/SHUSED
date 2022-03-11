@@ -54,12 +54,24 @@
 			<div class="d-flex scroll-element">
 				<c:forEach var="UsedShoesList" items="${UsedShoesList}">
 					<div class="m-3">
-						<img src="${UsedShoesList.imagePath}" class="droppedShoes-image">
+						<img src="${UsedShoesList.imagePath}" class="mainPageShoes-image">
 						<br>
 						<span>${UsedShoesList.category}</span>
 						<br>
-						<span>${UsedShoesList.shoesName}</span>
+						
+						<c:choose>
+							<c:when test="${fn:length(UsedShoesList.shoesName) <= 23}" >
+								<span>${UsedShoesList.shoesName}</span>
+							</c:when>
+							<c:otherwise>
+								<span>${fn:substring(UsedShoesList.shoesName, 0, 23)}...</span>
+							</c:otherwise>
+						</c:choose>
 						<br>
+						
+						
+						
+						
 						<span>사이즈 : ${UsedShoesList.size}</span>
 						<br>
 						
@@ -111,14 +123,24 @@
 			<div class="d-flex scroll-element">
 				<c:forEach var="DroppedShoesList" items="${DroppedShoesList}">
 					<div class="m-3">
-						<img src="${DroppedShoesList.imagePath}" class="droppedShoes-image">
+						<img src="${DroppedShoesList.imagePath}" class="mainPageShoes-image">
 						<br>
 						<span>${DroppedShoesList.category}</span>
 						<br>
 						<span>${DroppedShoesList.modelNumber}</span>
 						<br>
-						<span>${DroppedShoesList.shoesName}</span>
+						
+						
+						<c:choose>
+							<c:when test="${fn:length(DroppedShoesList.shoesName) <= 23}" >
+								<span>${DroppedShoesList.shoesName}</span>
+							</c:when>
+							<c:otherwise>
+								<span>${fn:substring(DroppedShoesList.shoesName, 0, 23)}...</span>
+							</c:otherwise>
+						</c:choose>
 						<br>
+						
 						<span>발매일 : </span><fmt:formatDate value="${DroppedShoesList.date}" pattern="yyyy년 MM월 dd일" />
 					</div>
 				</c:forEach>

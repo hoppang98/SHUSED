@@ -35,7 +35,7 @@ public interface ShoesDAO {
 			@Param("condition") String condition, 
 			@Param("dealMethod") String dealMethod, 
 			@Param("explanation") String explanation, 
-			@Param("location") String location, 
+			@Param("place") String place, 
 			@Param("imagePath") String imagePath
 			);
 	

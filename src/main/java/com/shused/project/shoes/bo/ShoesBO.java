@@ -27,9 +27,9 @@ public class ShoesBO {
 	}
 	
 	
-	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, String location, MultipartFile file) {
+	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, String place, MultipartFile file) {
 		String filePath = FileManagerService.saveUsedShoesFile(userId, file);
-		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, location, filePath);
+		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, place, filePath);
 	}
 	
 	public List<UsedShoes> getUsedShoesList() {

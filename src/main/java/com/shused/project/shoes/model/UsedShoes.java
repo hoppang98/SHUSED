@@ -14,7 +14,7 @@ public class UsedShoes {
 	public int price;
 	public String condition;
 	public String dealMethod;
-	public String location;
+	public String place;
 	public String explanation;
 	public String imagePath;
 	public Date createdAt; 
@@ -85,11 +85,11 @@ public class UsedShoes {
 	public void setDealMethod(String dealMethod) {
 		this.dealMethod = dealMethod;
 	}
-	public String getLocation() {
-		return location;
+	public String getPlace() {
+		return place;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+	public void setPlace(String place) {
+		this.place = place;
 	}
 	public String getExplanation() {
 		return explanation;
