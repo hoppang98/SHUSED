@@ -84,7 +84,7 @@ public class FileManagerService {
 	
 	
 	// 판매 신발 파일 저장
-	public static String saveUsedShoesFile(int userId, MultipartFile file) {
+	public static String saveUsedShoesFile(int userId, MultipartFile[] file) {
 		if(file == null ) {
 			return null;
 		}

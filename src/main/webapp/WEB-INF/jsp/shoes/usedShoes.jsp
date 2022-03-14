@@ -223,6 +223,10 @@
 			let explanation = $("#explanationInput").val();
 			let place = $("#placeInput").val();
 			
+			var inputFile = $("input[name='fileInput']");
+			var files = inputFile[0].files;
+			console.log(files);
+			
 			if(category == "" || category == null) {
 				alert("카테고리를 선택해주세요");
 				return;
@@ -266,7 +270,10 @@
 			formData.append("dealMethod", dealMethod);
 			formData.append("explanation", explanation);
 			formData.append("place", place);
-			formData.append("file", $("#fileInput")[0].files[0]);
+			for(var i = 0; i < files.length; i++) {
+				formData.append("uploadFile", files[i]);
+			}
+			//formData.append("file", $("#fileInput")[0].files[0]);
 			
 			$.ajax({
 				type:"post"

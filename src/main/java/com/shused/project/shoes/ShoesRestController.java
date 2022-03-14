@@ -58,7 +58,7 @@ public class ShoesRestController {
 			@RequestParam("dealMethod") String dealMethod,
 			@RequestParam("explanation") String explanation,
 			@RequestParam("place") String place,
-			@RequestParam("file") MultipartFile file,
+			@RequestParam("uploadFile") MultipartFile[] file,
 			HttpServletRequest request
 			){
 		HttpSession session = request.getSession();
