@@ -80,4 +80,13 @@
 			`usedshoes`
 		ORDER BY `updatedAt` DESC
 	</select>
+	
+	
+	<select id="selectUsedShoesForDetail" resultType="com.shused.project.shoes.model.UsedShoes" parameterType="int">
+		SELECT *
+		FROM
+			`usedshoes`
+		WHERE
+			`id` = #{UsedShoesId} <!-- 위의 id값과 dao에서 보내온 postId가 일치하는 메모만 가져온다 -->
+	</select>
 </mapper>

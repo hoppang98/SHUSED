@@ -54,7 +54,10 @@
 			<div class="d-flex scroll-element">
 				<c:forEach var="UsedShoesList" items="${UsedShoesList}">
 					<div class="m-3">
-						<img src="${UsedShoesList.imagePath}" class="mainPageShoes-image">
+						<a href="/shoes/detail_view?UsedShoesListId=${UsedShoesList.id}">
+							<img src="${UsedShoesList.imagePath}" class="mainPageShoes-image">
+						</a>
+						
 						<br>
 						<span>${UsedShoesList.category}</span>
 						<br>

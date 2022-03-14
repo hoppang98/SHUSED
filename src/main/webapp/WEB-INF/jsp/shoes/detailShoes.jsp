@@ -21,12 +21,95 @@
 
 <%-- css파일 --%>
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-<title>Insert title here</title>
+<title>신발 상세보기</title>
 </head>
 <body>
 	<div id="wrap">
 		
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+		
+		<div class="d-flex justify-content-center fs-1 fw-bold p-3">상품정보</div>
+		<hr>
+		
+		<div class="ms-5">
+			<div class="d-flex justify-content-start fs-3 p-3">
+				<span>모델번호 &nbsp&nbsp</span>
+				<span class="fw-bold">${usedShoes.modelNumber}</span>
+			</div>
+			
+			<div class="d-flex justify-content-start fs-3 p-3">
+				<span>제품명 &nbsp&nbsp</span>
+				<span class="fw-bold">${usedShoes.shoesName}</span>
+			</div>
+			
+			<div class="d-flex justify-content-start fs-3 p-3">
+				<span>가격 &nbsp&nbsp</span>
+				<span class="fw-bold">${usedShoes.price} 원</span>
+			</div>
+			
+			<div class="d-flex justify-content-start fs-3 p-3">
+				<span>사이즈 &nbsp&nbsp</span>
+				<span class="fw-bold">${usedShoes.size}</span>
+			</div>
+			
+			<div class="d-flex justify-content-start fs-3 p-3">
+				<span>상태 &nbsp&nbsp</span>
+				<c:choose>
+					<c:when test="${usedShoes.condition eq 'new'}">
+						<span class="fw-bold">새 것</span>
+					</c:when>
+					<c:when test="${usedShoes.condition eq 'almostNew'}">
+						<span class="fw-bold">거의 새 것</span>
+					</c:when>
+					<c:when test="${usedShoes.condition eq 'normal'}">
+						<span class="fw-bold">보통</span>
+					</c:when>
+					<c:when test="${usedShoes.condition eq 'bad'}">
+						<span class="fw-bold">나쁨</span>
+					</c:when>
+				</c:choose>
+			</div>
+			
+			<div class="d-flex justify-content-start fs-3 p-3">
+				<span>거래방식 &nbsp&nbsp</span>
+				<c:choose>
+					<c:when test="${usedShoes.dealMethod eq 'post'}">
+						<span class="fw-bold">택배거래</span>
+					</c:when>
+					<c:otherwise>
+						<span class="fw-bold">직거래</span>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			
+			<c:choose>
+				<c:when test="${usedShoes.dealMethod eq 'direct'}">
+					<div class="d-flex justify-content-start fs-3 p-3">
+						<span>거래지역 &nbsp&nbsp</span>
+						<span class="fw-bold">${usedShoes.place}</span>
+					</div>
+				</c:when>
+			</c:choose>
+
+			
+			<div class="d-flex justify-content-start fs-3 p-3">
+				<span>상품설명 &nbsp&nbsp</span>
+				<div class="d-flex justify-content-start align-items-center">
+					<span class="fs-6">${usedShoes.explanation}</span>
+				</div>
+			</div>
+			
+			<hr>
+			<div class="d-flex justify-content-center fs-2 fw-bold p-1">상품이미지</div>
+			
+			<img src="${usedShoes.imagePath}" class="mainPageShoes-image">
+			
+			<div class="d-flex justify-content-end">
+				<button class="btn btn-info text-white">상품 구매하기</button>
+			</div>
+			
+			
+		</div>
 		
 	</div>
 </body>

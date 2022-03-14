@@ -35,4 +35,8 @@ public class ShoesBO {
 	public List<UsedShoes> getUsedShoesList() {
 		return shoesDAO.selectUsedShoes();
 	}
+	
+	public UsedShoes getUsedShoesForDetail (int UsedShoesId) {
+		return shoesDAO.selectUsedShoesForDetail(UsedShoesId);
+	}
 }

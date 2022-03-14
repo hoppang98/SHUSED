@@ -157,10 +157,6 @@
 				</div>
 			</div>
 
-
-
-
-
 			<div class="d-flex justify-content-between p-3 ms-5">
 				<span>제품설명</span>
 				<textarea class="form-control w-75" rows="10" id="explanationInput" placeholder="ex) 상품 설명을 입력해주세요. (10글자 이상) ex) 구입 시기, 착용 횟수"></textarea>
@@ -175,10 +171,6 @@
 				</div>
 			</div>
 			<div id="images_container"></div>
-
-
-
-
 
 
 			<div class="d-flex justify-content-end p-4">
@@ -200,7 +192,6 @@
 				img.setAttribute("class", "col-lg-4");
 				document.querySelector("div#images_container").appendChild(img);
 			};
-			
 			console.log(image);
 			reader.readAsDataURL(image);
 		}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shused.project.shoes.bo.ShoesBO;
 import com.shused.project.shoes.model.DroppedShoes;
@@ -43,6 +44,19 @@ public class ShoesController {
 	@GetMapping("/shoes/usedShoes_view")
 	public String usedShoesView() {
 		return "/shoes/usedShoes";
+	}
+	
+	
+	@GetMapping("/shoes/detail_view")
+	public String detailShoesView(
+			@RequestParam("UsedShoesListId") int UsedShoesId,
+			Model model
+			) {
+		UsedShoes usedShoes = shoesBO.getUsedShoesForDetail(UsedShoesId);
+		
+		model.addAttribute("usedShoes", usedShoes);
+		
+		return "/shoes/detailShoes";
 	}
 	
 }

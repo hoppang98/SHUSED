@@ -40,4 +40,7 @@ public interface ShoesDAO {
 			);
 	
 	public List<UsedShoes> selectUsedShoes();
+	
+	public UsedShoes selectUsedShoesForDetail (@Param("UsedShoesId") int UsedShoesId);
+
 }
