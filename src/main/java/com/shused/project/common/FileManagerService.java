@@ -106,10 +106,9 @@ public class FileManagerService {
 				Path path = Paths.get(filePath + multipartFile.getOriginalFilename());
 				logger.info("업로드 파일 명 : " + multipartFile.getOriginalFilename());
 				Files.write(path, bytes);
-				return "/usedShoesImages/" + directioryName + multipartFile.getOriginalFilename();
 				logger.info("/usedShoesImages/" + directioryName + multipartFile.getOriginalFilename());
 		}
-		
+		return "/usedShoesImages/" + directioryName + multipartFile.getOriginalFilename();
 		
 		
 		
