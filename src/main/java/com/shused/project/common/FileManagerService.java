@@ -1,5 +1,7 @@
 package com.shused.project.common;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -85,6 +87,7 @@ public class FileManagerService {
 	
 	// 판매 신발 파일 저장
 	public static String saveUsedShoesFile(int userId, MultipartFile[] file) {
+		
 		if(file == null ) {
 			return null;
 		}
@@ -98,18 +101,22 @@ public class FileManagerService {
 			return null;
 		}
 		
-		try {
-			byte[] bytes = file.getBytes();
-			Path path = Paths.get(filePath + file.getOriginalFilename());
-			Files.write(path, bytes);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+		for(MultipartFile multipartFile : file) {
+				byte[] bytes = multipartFile.getBytes();
+				Path path = Paths.get(filePath + multipartFile.getOriginalFilename());
+				logger.info("업로드 파일 명 : " + multipartFile.getOriginalFilename());
+				Files.write(path, bytes);
+				return "/usedShoesImages/" + directioryName + multipartFile.getOriginalFilename();
+				logger.info("/usedShoesImages/" + directioryName + multipartFile.getOriginalFilename());
 		}
 		
-		logger.info("/usedShoesImages/" + directioryName + file.getOriginalFilename());
-		return "/usedShoesImages/" + directioryName + file.getOriginalFilename();
+		
+		
+		
+		
+
+		
+
 	}
 	
 	// 판매 신발 파일 삭제

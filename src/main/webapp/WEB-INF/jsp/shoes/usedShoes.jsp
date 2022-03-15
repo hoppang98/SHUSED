@@ -223,7 +223,7 @@
 			let explanation = $("#explanationInput").val();
 			let place = $("#placeInput").val();
 			
-			var inputFile = $("input[name='fileInput']");
+			var inputFile = $("input[name=fileInput]");
 			var files = inputFile[0].files;
 			console.log(files);
 			
