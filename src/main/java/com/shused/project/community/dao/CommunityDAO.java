@@ -19,4 +19,6 @@ public interface CommunityDAO {
 			);
 	
 	public List<Post> selectPostList();
+	
+	public Post selectPost(@Param("postId") int postId);
 }

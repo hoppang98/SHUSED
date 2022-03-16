@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shused.project.community.bo.CommunityBO;
 import com.shused.project.community.model.Post;
@@ -31,5 +32,17 @@ public class CommunityController {
 	@GetMapping("/community/createPost_view")
 	public String createView() {
 		return "/community/createPost";
+	}
+	
+	@GetMapping("/community/detailPost_view")
+	public String detailView(
+			@RequestParam("postId") int postId,
+			Model model
+			) {
+		Post post = communityBO.getPost(postId);
+		
+		model.addAttribute("post", post);
+		
+		return "/community/detailPost";
 	}
 }

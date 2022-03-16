@@ -24,4 +24,8 @@ public class CommunityBO {
 	public List<Post> getPostList(){
 		return communityDAO.selectPostList();
 	}
+	
+	public Post getPost(int postId) {
+		return communityDAO.selectPost(postId);
+	}
 }
