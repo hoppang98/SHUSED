@@ -40,8 +40,8 @@
 		
 		<!-- 버튼 -->
 		<div class="d-flex justify-content-around align-items-center my-3">
-			<button type="button" id="sellBtn" class="btn btn-info w-50 me-2 fs-1 fw-bold"><a href="/shoes/usedShoes_view">SELL</a></button>
-			<button type="button" id="communityBtn" class="btn btn-info w-50 fs-1 fw-bold">COMMUNITY</button>
+			<a href="/shoes/usedShoes_view" class="btn btn-info w-50 me-2 fs-1 fw-bold">SELL</a>
+			<a href="/community/main_view" class="btn btn-info w-50 me-2 fs-1 fw-bold">COMMUNITY</a>
 		</div>
 		
 		
@@ -150,7 +150,6 @@
 			</div>
 			</div>
 		</div>
-		
 		
 
 	</div>

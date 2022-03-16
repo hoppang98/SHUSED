@@ -34,7 +34,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		} else {	// 비 로그인 상태
 			// 리스트 화면, 디테일 화면 접근 금지
 			// 로그인 페이지로 이동
-			if(uri.startsWith("/shoes/")) {
+			if(uri.startsWith("/shoes/") || uri.startsWith("/community/")) {
 				response.sendRedirect("/user/signin_view");
 				return false;
 			}

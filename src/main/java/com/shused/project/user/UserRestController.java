@@ -102,7 +102,7 @@ public class UserRestController {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("userId", user.getId());
-			session.setAttribute("userLoginId", user.getLoginId());
+			//session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("nickname", user.getNickname());
 			session.setAttribute("phoneNumber", user.getPhoneNumber());
 		} else {

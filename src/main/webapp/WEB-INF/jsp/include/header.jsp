@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header class="d-flex align-items-center justify-content-between border-bottom border-info border-3">
-	<p class="fs-1 p-2 fw-bold fst-italic"><a href="/shoes/mainPage_view">SHUSED</a></p>
-	<div>
+	<a href="/shoes/mainPage_view" class="fs-1 p-2 fw-bold fst-italic">SHUSED</a>
+	<div class="p-1">
 	
 		<c:choose>
 			<c:when test="${not empty userId}">
@@ -22,6 +22,7 @@
 		<div class="d-flex align-items-center justify-content-center mt-1">
 			<input type="text" class="form-control" placeholder="검색">
 			<button type="button" class="btn btn-outline-secondary"><i class="bi bi-search"></i></button>
+			
 		</div>
 		
 	</div>

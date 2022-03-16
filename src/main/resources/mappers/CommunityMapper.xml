@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.shused.project.community.dao.CommunityDAO">
+	
+	<insert id="insertPost" parameterType="map">
+		INSERT INTO `post`
+		(
+			`userId`
+			,`userNickname`
+			,`subject`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			,#{userNickname}
+			,#{subject}
+			,#{content}
+			,#{imagePath}
+			,now()
+			,now()
+		)
+	</insert>
+	
+	<select id="selectPostList" resultType="com.shused.project.community.model.Post">
+		SELECT
+			`id`
+			,`userId`
+			,`userNickname`
+			,`subject`
+			,`content`
+			,`imagePath`
+			,createdAt`
+			,updatedAt`
+		FROM
+			`post`
+		ORDER BY `id` DESC
+	</select>
+</mapper>
