@@ -151,6 +151,8 @@
 			</div>
 		</div>
 		
+		<a href="/shoes/droppedShoes_view" class="btn btn-info">발매 신발 등록</a>
+		
 
 	</div>
 </body>

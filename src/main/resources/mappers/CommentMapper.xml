@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.shused.project.community.comment.dao.CommentDAO">
+
+	<insert id="addComment" parameterType="map">
+		INSERT INTO `comment`
+		(
+			`postId`
+			,`userId`
+			,`userNickname`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{postId}
+			,#{userId}
+			,#{userNickname}
+			,#{content}
+			,now()
+			,now()
+		)
+	</insert>
+	
+	<select id="selectCommentList" parameterType="int" resultType="com.shused.project.community.comment.model.Comment">
+		SELECT	
+			`id`
+			,`postId`
+			,`userId`
+			,`userNickname`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+	</select>
+</mapper>

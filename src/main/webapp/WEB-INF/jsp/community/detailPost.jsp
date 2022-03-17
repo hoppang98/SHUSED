@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,24 +26,71 @@
 		
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
+
+		
 		<section class="d-flex justify-content-center">
 			<div class="w-75 my-5">
+			
 				<div class="fs-1 fw-bold fst-italic text-center">COMMUNITY</div>
 				
+					<div class="d-flex justify-content-end align-items-center">
+						<a href="#" class="recommentBtn" data-post-id="${post.id}"> 
+							<c:choose>
+								<c:when test="${isRecommend}">
+									<i class="bi bi-hand-thumbs-up-fill" style="font-size:2rem;"></i>
+								</c:when>
+								<c:otherwise>
+									<i class="bi bi-hand-thumbs-up" style="font-size:2rem;"></i>
+								</c:otherwise>
+							</c:choose>
+						</a>
+						<span> 추천 ${recommendCount}개</span>
+					</div>
+					
 				<div class="d-flex justify-content-center align-items-center mt-3">
 					<span class="w-auto fs-5 fw-bold">제목 :&nbsp </span>
 					<div>${post.subject}</div>
 				</div>
-				<div class="border">
+				<br>
+				<div class="border border-light border-1 rounded">
 					${post.content}
 				</div>
-				<div>
+				<br>
+				<div class="d-flex align-items-center justify-content-center">
 					<img src="${post.imagePath}">
 				</div>
+				
+				<table class="table text-center">
+					<thead>
+						<tr>
+							<th class="col-2">작성자</th>
+							<th>내용</th>
+							<th>작성일자</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="commentList" items="${commentList}">
+						<tr>
+							<td class="fw-bold">${commentList.userNickname}</td>
+							<td>
+								${commentList.content}
+							</td>
+							<td>
+								<fmt:formatDate value="${commentList.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" />
+							</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				
+				<div class="d-flex">
+					<input type="text" class="form-control" placeholder="댓글 달기" id="comment${post.id}">
+					<button type="button" class="btn btn-info commentInputBtn col-1 text-white" data-post-id="${post.id}">게시</button>
+				</div>
+
 				<div class="d-flex justify-content-between mt-3">
-					<div>
-						<button type="button" class="btn btn-danger" id="deleteBtn" data-post-id="${post.id}">삭제</button>
-					</div>
+					<button type="button" class="btn btn-danger" id="deleteBtn" data-post-id="${post.id}">삭제</button>
+					
 					<button type="button" class="btn btn-success" id="updateBtn">수정</button>
 				</div>
 			</div>
@@ -57,7 +105,52 @@
 		
 		
 		
-		
+		<script>
+			$(document).ready(function(){
+				$(".commentInputBtn").on("click", function() {
+					let postId = $(this).data("post-id");
+					let comment = $("#comment" + postId).val().trim(); 
+					
+					if(comment == "") {
+						alert("내용을 입력하세요");
+						return;
+					}
+					
+					$.ajax({
+						type:"post"
+						,url:"/community/comment/create"
+						,data:{"comment":comment, "postId":postId}
+						,success:function(data) {
+							if(data.result == "success"){
+								alert("댓글 입력 성공");
+								location.reload();
+							} else {
+								alert("댓글 입력 실패");
+							}
+						}, error:function(){
+							alert("에러 발생");
+						}
+					});
+				});
+				
+				$(".recommentBtn").on("click", function(e){
+					e.preventDefault();
+					let postId = $(this).data("post-id");
+					
+					$.ajax({
+						type:"get"
+							,url:"/recommend/like"
+							,data:{"postId":postId}
+							,success:function(data) {
+								alert("좋아요");
+								location.reload();
+							},error:function(){
+								alert("좋아요 에러 발생");
+							}
+					});
+				});
+			});
+		</script>
 		
 	</div>
 </body>

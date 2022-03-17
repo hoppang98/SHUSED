@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.shused.project.community.recommend.dao.RecommendDAO">
+
+	<insert id="insertRecommend" parameterType="map">
+		INSERT INTO `recommend`
+		(
+			`postId`
+			,`userId`
+			,`createdAt`
+		)
+		VALUES
+		(
+			#{postId}
+			,#{userId}
+			,now()
+		)
+	</insert>
+	
+	<select id="selectRecommendCountByUserId" parameterType="map" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			`recommend`
+		WHERE
+			`postId` = #{postId}
+			AND `userId` = #{userId}
+	</select>
+	
+	<delete id="deleteRecommend">
+		DELETE FROM `recommend`
+		WHERE
+			`postId` = #{postId}
+			AND `userId` = #{userId} 
+	</delete>
+	
+	<select id="selectRecommendCount" parameterType="int" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			`recommend`
+		WHERE
+			`postId` = #{postId}
+	</select>
+</mapper>
