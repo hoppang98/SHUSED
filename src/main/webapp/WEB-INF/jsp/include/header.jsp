@@ -10,7 +10,7 @@
 			<c:when test="${not empty userId}">
 				<div class="small d-flex justify-content-end me-2">${nickname}님 환영합니다</div>
 				<div class="d-flex justify-content-center">
-					<div class="small"><a href="#" class="text-dark text-decoration-none fw-light me-2">마이페이지</a></div>
+					<div class="small"><a href="/login/user/mypage_view" class="text-dark text-decoration-none fw-light me-2">마이페이지</a></div>
 					<div class="small"><a href="/user/sign_out" class="text-dark text-decoration-none fw-light me-2">로그아웃</a></div>
 				</div>
 			</c:when>

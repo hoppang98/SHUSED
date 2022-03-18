@@ -25,9 +25,7 @@
 	<div id="wrap">
 		
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		
 
-		
 		<section class="d-flex justify-content-center">
 			<div class="w-75 my-5">
 			
@@ -89,12 +87,28 @@
 				</div>
 
 				<div class="d-flex justify-content-between mt-3">
-					<button type="button" class="btn btn-danger" id="deleteBtn" data-post-id="${post.id}">삭제</button>
+					<button type="button" class="btn btn-danger" data-post-id="${post.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
 					
 					<button type="button" class="btn btn-success" id="updateBtn">수정</button>
 				</div>
 			</div>
 
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        삭제하시겠습니까?
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-primary">취소</button>
+				        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="deleteBtn" data-delete-id="${post.id}">삭제하기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			
 		</section>
 		
 					
@@ -147,6 +161,28 @@
 							},error:function(){
 								alert("좋아요 에러 발생");
 							}
+					});
+				});
+				
+				
+				$("#deleteBtn").on("click",function(e){
+					e.preventDefault();
+					let postId = $(this).data("delete-id");
+					
+					$.ajax({
+						type:"get"
+						,url:"/community/delete"
+						,data:{"postId":postId}
+						,success:function(data) {
+							if(data.result == "success") {
+								location.href="/community/main_view";
+								alert("삭제 성공");
+							} else{
+								alert("삭제 실패");
+							}
+						},error:function(){
+							alert("에러발생");
+						}
 					});
 				});
 			});

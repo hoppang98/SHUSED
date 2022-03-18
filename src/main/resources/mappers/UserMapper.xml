@@ -68,5 +68,16 @@
 			`loginId` = #{loginId}
 			AND `password` = #{password} 
 	</select>
+	
+	<select id="selectUserForSell" parameterType="int" resultType="com.shused.project.user.model.User">
+		SELECT
+			`id`
+			,`nickname`
+			,`phoneNumber`
+		FROM
+			`user`
+		WHERE
+			
+	</select>
 
 </mapper>

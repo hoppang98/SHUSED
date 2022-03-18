@@ -21,4 +21,8 @@ public interface CommunityDAO {
 	public List<Post> selectPostList();
 	
 	public Post selectPost(@Param("postId") int postId);
+	
+	public int deletePost(@Param("postId") int postId);
+	
+	public List<Post> selectPostByUserId(@Param("userId") int userId);
 }

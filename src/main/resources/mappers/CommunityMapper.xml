@@ -57,4 +57,23 @@
 		WHERE
 			`id` = #{postId} 
 	</select>
+	
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM `post`
+		WHERE
+			`id` = #{postId}
+	</delete>
+	
+	<select id="selectPostByUserId" resultType="com.shused.project.community.model.Post" parameterType="int">
+		SELECT
+			`id`
+			,`subject`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`userId` = #{userId} 
+	</select>
 </mapper>

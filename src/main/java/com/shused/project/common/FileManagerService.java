@@ -1,7 +1,5 @@
 package com.shused.project.common;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -86,37 +84,36 @@ public class FileManagerService {
 	
 	
 	// 판매 신발 파일 저장
-	public static String saveUsedShoesFile(int userId, MultipartFile[] file) {
-		
-		if(file == null ) {
+	public static String saveUsedShoesFile(int userId, MultipartFile file) {
+
+		if (file == null) {
 			return null;
 		}
-		
+
 		String directioryName = userId + "_" + System.currentTimeMillis() + "/";
-		
+
 		String filePath = USED_SHOES_FILE_UPLOAD_PATH + directioryName;
-		
+
 		File directiory = new File(filePath);
-		if(directiory.mkdir() == false) {
+		if (directiory.mkdir() == false) {
 			return null;
 		}
-		
-		for(MultipartFile multipartFile : file) {
-				byte[] bytes = multipartFile.getBytes();
-				Path path = Paths.get(filePath + multipartFile.getOriginalFilename());
-				logger.info("업로드 파일 명 : " + multipartFile.getOriginalFilename());
-				Files.write(path, bytes);
-				logger.info("/usedShoesImages/" + directioryName + multipartFile.getOriginalFilename());
+
+		try {
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get(filePath + file.getOriginalFilename());
+			Files.write(path, bytes);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return "/usedShoesImages/" + directioryName + multipartFile.getOriginalFilename();
-		
-		
-		
-		
 
-		
-
+		logger.info("/usedShoesImages/" + directioryName + file.getOriginalFilename());
+		return "/usedShoesImages/" + directioryName + file.getOriginalFilename();
 	}
+		
+		
 	
 	// 판매 신발 파일 삭제
 	public static void removeUsedShoesFile(String filePath) {

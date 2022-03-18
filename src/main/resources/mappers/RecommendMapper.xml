@@ -44,4 +44,10 @@
 		WHERE
 			`postId` = #{postId}
 	</select>
+	
+	<delete id="deleteRecommendByCommunityPostId" parameterType="int">
+		DELETE FROM `recommend`
+		WHERE
+			`postId` = #{postId}
+	</delete>
 </mapper>

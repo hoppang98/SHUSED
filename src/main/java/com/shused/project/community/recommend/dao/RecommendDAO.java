@@ -24,4 +24,5 @@ public interface RecommendDAO {
 	
 	public int selectRecommendCount(@Param("postId") int postId);
 	
+	public int deleteRecommendByCommunityPostId(@Param("postId") int postId);
 }

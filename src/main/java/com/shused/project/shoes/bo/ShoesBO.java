@@ -10,6 +10,7 @@ import com.shused.project.common.FileManagerService;
 import com.shused.project.shoes.dao.ShoesDAO;
 import com.shused.project.shoes.model.DroppedShoes;
 import com.shused.project.shoes.model.UsedShoes;
+import com.shused.project.user.model.User;
 
 @Service
 public class ShoesBO {
@@ -27,7 +28,7 @@ public class ShoesBO {
 	}
 	
 	
-	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, String place, MultipartFile[] file) {
+	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, String place, MultipartFile file) {
 		String filePath = FileManagerService.saveUsedShoesFile(userId, file);
 		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, place, filePath);
 	}
@@ -39,4 +40,9 @@ public class ShoesBO {
 	public UsedShoes getUsedShoesForDetail (int UsedShoesId) {
 		return shoesDAO.selectUsedShoesForDetail(UsedShoesId);
 	}
+	
+	public List<UsedShoes> getUsedShoesListByUserId(int userId) {
+		return shoesDAO.selectUsedShoesByUserId(userId);
+	}
+
 }

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,54 +20,54 @@
 
 <%-- css파일 --%>
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-
-<title>SHUSED COMMUNITY</title>
+<title>SHUSED 마이페이지</title>
 </head>
 <body>
-
 	<div id="wrap">
 		
-		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
+		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
-		<section class="d-flex justify-content-center container-fluid">	
-			<div class="w-100 my-3">
-				<div class="fs-1 fw-bold fst-italic text-center">COMMUNITY</div>
-				
-				<table class="table text-center border">
-					<thead>
+		<div class="d-flex justify-content-around align-items-center my-3">
+			<a href="#" class="btn btn-info w-50 me-2 fs-2 fw-bold text-white">나의 판매 물품 목록</a>
+			<a href="#" class="btn btn-info w-50 me-2 fs-2 fw-bold text-white">나의 커뮤니티 게시글</a>
+		</div>
+
+		<div class="d-none">
+			<table class="table text-center border">
+				<thead>
+					<tr>
+						<th><p class="fw-bold fs-5">NO.</p></th>
+						<th><p class="fw-bold fs-5">제목</p></th>
+						<th><p class="fw-bold fs-5">작성일</p></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="post" items="${myPostlist}">
 						<tr>
-							<th><p class="fw-bold fs-5">NO.</p></th>
-							<th><p class="fw-bold fs-5">제목</p></th>
-							<th><p class="fw-bold fs-5">작성일</p></th>
-							<th><p class="fw-bold fs-5">작성자</p></th>
+							<td>${post.id}</td>
+							<td><a href="/community/detailPost_view?postId=${post.id}">${post.subject}</a>
+							</td>
+							<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="post" items="${postlist}">
-						<tr>
-							<td>
-								${post.id}
-							</td>
-							<td>
-								<a href="/community/detailPost_view?postId=${post.id}">${post.subject}</a>
-							</td>
-							<td>
-								<fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" />
-							</td>
-							<td>
-								${post.userNickname}
-							</td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				
-				<div class="d-flex justify-content-end">
-					<a href="/community/createPost_view" class="btn btn-info text-white">글쓰기</a>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+
+
+		<c:forEach var="myUsedShoesList" items="${myUsedShoesList}">
+			<div class="card" style="width: 18rem;">
+				<img src="${myUsedShoesList.imagePath}" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">${myUsedShoesList.shoesName}</h5>
+					<p class="card-text">${myUsedShoesList.price}</p>
+					<a href="#" class="btn btn-primary">상세보기</a>
 				</div>
 			</div>
-			
-		</section>
+		</c:forEach>
+		
+		
+		
 	</div>
 </body>
 </html>

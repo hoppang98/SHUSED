@@ -54,4 +54,6 @@ public class UserBO {
 		
 		return userDAO.selectUser(loginId, encPassword);
 	}
+	
+
 }

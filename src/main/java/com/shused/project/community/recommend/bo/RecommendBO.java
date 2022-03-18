@@ -35,4 +35,8 @@ public class RecommendBO {
 	public int getRecommendCount(int postId) {
 		return recommendDAO.selectRecommendCount(postId);
 	}
+	
+	public int deleteRecommendByCommunityPostId(int postId) {
+		return recommendDAO.deleteRecommendByCommunityPostId(postId);
+	}
 }

@@ -105,12 +105,85 @@
 			<img src="${usedShoes.imagePath}" class="mainPageShoes-image">
 			
 			<div class="d-flex justify-content-end">
-				<button class="btn btn-info text-white">상품 구매하기</button>
+				<button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#buyModal">상품 구매하기</button>
 			</div>
 			
 			
 		</div>
-		
+
+		<!-- Modal -->
+		<div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">구매하시겠습니까?</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						모델번호 : ${usedShoes.modelNumber}<br> 
+						제품명 : ${usedShoes.shoesName}<br> 
+						가격 : ${usedShoes.price}원<br> 
+						사이즈 : ${usedShoes.size}<br>
+						<c:choose>
+							<c:when test="${usedShoes.condition eq 'new'}">
+								상태 : 새 것
+							</c:when>
+							<c:when test="${usedShoes.condition eq 'almostNew'}">
+								상태 : 거의 새 것
+							</c:when>
+							<c:when test="${usedShoes.condition eq 'normal'}">
+								상태 : 보통
+							</c:when>
+							<c:when test="${usedShoes.condition eq 'bad'}">
+								상태 : 나쁨
+							</c:when>
+						</c:choose>
+
+						<br>
+						<c:choose>
+							<c:when test="${usedShoes.dealMethod eq 'post'}">
+								택배거래
+							</c:when>
+							<c:otherwise>
+								직거래 : ${usedShoes.place}
+							</c:otherwise>
+						</c:choose>
+						<br>
+						상품설명 : ${usedShoes.explanation}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sellerinfoModal">구매하기</button>
+					</div>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="sellerinfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">판매자 정보</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									판매자 닉네임 : ${usedShoes.nickname}<br> 판매자 전화번호 :
+									${usedShoes.phoneNumber}<br>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로가기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	
+	
+	
+
+	
 	</div>
+
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.shused.project.shoes.model.DroppedShoes;
 import com.shused.project.shoes.model.UsedShoes;
+import com.shused.project.user.model.User;
 
 @Repository
 public interface ShoesDAO {
@@ -43,4 +44,5 @@ public interface ShoesDAO {
 	
 	public UsedShoes selectUsedShoesForDetail (@Param("UsedShoesId") int UsedShoesId);
 
+	public List<UsedShoes> selectUsedShoesByUserId(@Param("userId") int UserId);
 }

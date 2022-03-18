@@ -90,5 +90,11 @@
 			`id` = #{UsedShoesId} <!-- 위의 id값과 dao에서 보내온 postId가 일치하는 메모만 가져온다 -->
 	</select>
 	
-	
+	<select id="selectUsedShoesByUserId" resultType="com.shused.project.shoes.model.UsedShoes" parameterType="int">
+		SELECT *
+		FROM
+			`usedshoes`
+		WHERE
+			`userId` = #{userId}
+	</select>
 </mapper>
