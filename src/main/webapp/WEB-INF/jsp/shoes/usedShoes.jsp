@@ -221,6 +221,7 @@
 			let condition = $("input[name=condition]:checked").val();
 			let dealMethod = $("input[name=dealMethod]:checked").val();
 			let explanation = $("#explanationInput").val();
+			let state = true;
 			let place = $("#placeInput").val();
 			
 			if(category == "" || category == null) {
@@ -265,6 +266,7 @@
 			formData.append("condition", condition);
 			formData.append("dealMethod", dealMethod);
 			formData.append("explanation", explanation);
+			formData.append("state", state);
 			formData.append("place", place);
 			formData.append("uploadFile", $("#fileInput")[0].files[0]);
 			

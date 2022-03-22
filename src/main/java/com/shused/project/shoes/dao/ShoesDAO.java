@@ -35,6 +35,7 @@ public interface ShoesDAO {
 			@Param("condition") String condition, 
 			@Param("dealMethod") String dealMethod, 
 			@Param("explanation") String explanation, 
+			@Param("state") boolean state,
 			@Param("place") String place, 
 			@Param("imagePath") String imagePath
 			);
@@ -49,4 +50,11 @@ public interface ShoesDAO {
 			@Param("shoesId") int shoesId,
 			@Param("userId") int userId
 			);
+	
+	public int soldOutShoes(
+			@Param("shoesId") int shoesId,
+			@Param("userId") int userId
+			);
+	
+	public List<UsedShoes> selectUsedShoesForSearch(@Param("searchKeyword") String searchKeyword);
 }

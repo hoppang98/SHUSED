@@ -20,11 +20,20 @@
 		</c:choose>
 		
 		<div class="d-flex align-items-center justify-content-center mt-1">
-			<input type="text" class="form-control" placeholder="검색">
-			<button type="button" class="btn btn-outline-secondary"><i class="bi bi-search"></i></button>
-			
+			<input type="text" class="form-control" placeholder="검색" id="searchShoesInput">
+			<button type="button" class="btn btn-outline-secondary" id="searchShoesBtn"><i class="bi bi-search"></i></button>
 		</div>
-		
+
+
+	<script>
+	$(document).ready(function(){
+		$("#searchShoesBtn").on("click", function(){
+			let searchKeyword = $("#searchShoesInput").val();
+			location.href="/shoes/search_view?searchKeyword=" + searchKeyword;
+		});
+	});
+	</script>
 	</div>
 			
+	
 </header>

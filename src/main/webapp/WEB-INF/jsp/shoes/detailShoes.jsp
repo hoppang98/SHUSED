@@ -105,11 +105,22 @@
 			<img src="${usedShoes.imagePath}" class="mainPageShoes-image">
 			<hr>
 			
-			<div class="d-flex justify-content-between">
-				<button class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#deleteModal">상품 삭제하기</button>
-				<button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#buyModal">상품 구매하기</button>
-			</div>
-			
+			<c:choose>
+				<c:when test="${usedShoes.state eq 'false' }">
+				<div class="d-flex justify-content-between">
+						<span class="fs-1 p-2 fw-bold fst-italic">판매가 완료된 상품입니다.</span>
+						<button class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#deleteModal">상품 삭제하기</button>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="d-flex justify-content-between">
+						<button class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#deleteModal">상품 삭제하기</button>
+						<button class="btn btn-secondary text-white" data-bs-toggle="modal" data-bs-target="#soldOutModal">판매완료 설정하기</button>
+						<button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#buyModal">상품 구매하기</button>
+					</div>
+				</c:otherwise>
+			</c:choose>
+			<br>
 			
 		</div>
 
@@ -196,7 +207,23 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<!-- 판매완료 modal -->
+		<div class="modal fade" id="soldOutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">판매완료 설정하기</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">판매를 완료하셨습니까?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로가기</button>
+						<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="soldOutShoesBtn" data-soldoutshoes-id="${usedShoes.id}">판매완료</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	<script>
 		$(document).ready(function(){
@@ -213,6 +240,26 @@
 							location.href="/shoes/mainPage_view";
 						} else {
 							alert("상품 판매자만 삭제가 가능합니다");
+						}
+					}, error:function(){
+						alert("에러발생");
+					}
+				});
+			});
+			
+			$("#soldOutShoesBtn").on("click", function(){
+				let shoesId = $(this).data("soldoutshoes-id");
+				
+				$.ajax({
+					type:"post"
+					,url:"/shoes/soldOut"
+					,data:{"shoesId":shoesId}
+					,success:function(data) {
+						if(data.result == "success"){
+							alert("판매완료!");
+							location.href="/shoes/mainPage_view";
+						} else {
+							alert("상품 판매자만 판매완료 설정이 가능합니다");
 						}
 					}, error:function(){
 						alert("에러발생");

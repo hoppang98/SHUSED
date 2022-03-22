@@ -23,7 +23,7 @@ public class ShoesController {
 	public String signupView(
 			Model model
 			) {
-		 
+		
 		List<DroppedShoes> DroppedShoesList = shoesBO.getDroppedShoesList();
 		model.addAttribute("DroppedShoesList", DroppedShoesList);
 		
@@ -60,4 +60,14 @@ public class ShoesController {
 		return "/shoes/detailShoes";
 	}
 	
+	@GetMapping("/shoes/search_view")
+	public String searchShoewView(
+			@RequestParam("searchKeyword") String searchKeyword,
+			Model model
+			) {
+		List<UsedShoes> usedShoesSearchList = shoesBO.getUsedShoesListForSearch(searchKeyword);
+		model.addAttribute("usedShoesSearchList", usedShoesSearchList);
+		
+		return "/shoes/searchShoes";
+	}
 }

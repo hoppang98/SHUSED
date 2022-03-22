@@ -88,8 +88,6 @@
 
 				<div class="d-flex justify-content-between mt-3">
 					<button type="button" class="btn btn-danger" data-post-id="${post.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
-					
-					<button type="button" class="btn btn-success" id="updateBtn">수정</button>
 				</div>
 			</div>
 
@@ -178,7 +176,7 @@
 								location.href="/community/main_view";
 								alert("삭제 성공");
 							} else{
-								alert("삭제 실패");
+								alert("게시물 작성자만 삭제가 가능합니다.");
 							}
 						},error:function(){
 							alert("에러발생");

@@ -50,6 +50,7 @@
 			,`dealMethod`
 			,`place`
 			,`explanation`
+			,`state`
 			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
@@ -68,6 +69,7 @@
 			,#{dealMethod}
 			,#{place}
 			,#{explanation}
+			,#{state}
 			,#{imagePath}
 			,now()
 			,now()
@@ -104,4 +106,23 @@
 			`id` = #{shoesId}
 			AND `userId` = #{userId}
 	</delete>
+	
+	<update id="soldOutShoes" parameterType="map">
+		UPDATE `usedshoes`
+		SET
+			`state` = false
+		WHERE
+			`id` = #{shoesId}
+			AND `userId` = #{userId}
+	</update>
+	
+	<select id="selectUsedShoesForSearch" resultType="com.shused.project.shoes.model.UsedShoes">
+		SELECT * 
+		FROM 
+			`usedshoes`
+		WHERE
+			`shoesName` LIKE CONCAT ('%', #{searchKeyword}, '%')
+		OR
+			`modelNumber` LIKE CONCAT ('%', #{searchKeyword}, '%')
+	</select>
 </mapper>

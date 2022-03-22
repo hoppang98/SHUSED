@@ -1,12 +1,14 @@
 package com.shused.project.shoes;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shused.project.shoes.bo.ShoesBO;
+import com.shused.project.shoes.model.UsedShoes;
 
 @RestController
 public class ShoesRestController {
@@ -58,6 +61,7 @@ public class ShoesRestController {
 			@RequestParam("condition") String condition,
 			@RequestParam("dealMethod") String dealMethod,
 			@RequestParam("explanation") String explanation,
+			@RequestParam("state") boolean state,
 			@RequestParam("place") String place,
 			@RequestParam("uploadFile") MultipartFile file,
 			HttpServletRequest request
@@ -68,7 +72,7 @@ public class ShoesRestController {
 		String nickname = (String)session.getAttribute("nickname");
 		String phoneNumber = (String)session.getAttribute("phoneNumber");
 		
-		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, place, file);
+		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, file);
 		
 		Map<String, String> result = new HashMap<>();
 		if(count == 1) {
@@ -98,5 +102,23 @@ public class ShoesRestController {
 		}
 		return result;
 	}
-
+	
+	@PostMapping("/shoes/soldOut")
+	public Map<String, String> soldOut(
+			@RequestParam("shoesId") int shoesId,
+			HttpServletRequest request
+			){
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		int count = shoesBO.soldOutShoes(shoesId, userId);
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		return result;
+	}
 }

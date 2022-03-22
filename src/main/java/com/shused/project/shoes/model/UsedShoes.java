@@ -16,9 +16,17 @@ public class UsedShoes {
 	public String dealMethod;
 	public String place;
 	public String explanation;
+	public boolean state;
 	public String imagePath;
 	public Date createdAt; 
 	public Date updatedAt;
+	
+	public boolean isState() {
+		return state;
+	}
+	public void setState(boolean state) {
+		this.state = state;
+	}
 	public int getId() {
 		return id;
 	}

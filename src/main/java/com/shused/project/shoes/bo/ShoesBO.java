@@ -27,9 +27,9 @@ public class ShoesBO {
 	}
 	
 	
-	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, String place, MultipartFile file) {
+	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place, MultipartFile file) {
 		String filePath = FileManagerService.saveUsedShoesFile(userId, file);
-		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, place, filePath);
+		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, filePath);
 	}
 	
 	public List<UsedShoes> getUsedShoesList() {
@@ -45,7 +45,17 @@ public class ShoesBO {
 	}
 	
 	public int deleteShoes(int shoesId, int userId) {
+		UsedShoes usedShoes = shoesDAO.selectUsedShoesForDetail(shoesId);
+		FileManagerService.removeUsedShoesFile(usedShoes.getImagePath());
 		return shoesDAO.deleteShoes(shoesId, userId);
+	}
+	
+	public int soldOutShoes(int shoesId, int userId) {
+		return shoesDAO.soldOutShoes(shoesId, userId);
+	}
+	
+	public List<UsedShoes> getUsedShoesListForSearch (String searchKeyword){
+		return shoesDAO.selectUsedShoesForSearch(searchKeyword);
 	}
 
 }

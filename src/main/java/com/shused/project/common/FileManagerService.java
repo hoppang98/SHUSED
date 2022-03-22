@@ -187,7 +187,7 @@ public class FileManagerService {
 			return;
 		}
 
-		String realFilePath = COMMUNITY_FILE_UPLOAD_PATH + filePath.replace("/CommunityImages/", "");
+		String realFilePath = COMMUNITY_FILE_UPLOAD_PATH + filePath.replace("/communityImages/", "");
 
 		Path path = Paths.get(realFilePath);
 
