@@ -51,66 +51,66 @@
 			<br>
 			<span class="fst-italic">최근 등록 상품</span>
 			<div class="scroll-wrap">
-			<div class="d-flex scroll-element">
-				<c:forEach var="UsedShoesList" items="${UsedShoesList}">
-					<div class="m-3">
-						<a href="/shoes/detail_view?UsedShoesListId=${UsedShoesList.id}">
-							<img src="${UsedShoesList.imagePath}" class="mainPageShoes-image">
-						</a>
-						
-						<br>
-						<span>${UsedShoesList.category}</span>
-						<br>
-						
-						<c:choose>
-							<c:when test="${fn:length(UsedShoesList.shoesName) <= 23}" >
-								<span>${UsedShoesList.shoesName}</span>
-							</c:when>
-							<c:otherwise>
-								<span>${fn:substring(UsedShoesList.shoesName, 0, 23)}...</span>
-							</c:otherwise>
-						</c:choose>
-						<br>
-						
-						
-						
-						
-						<span>사이즈 : ${UsedShoesList.size}</span>
-						<br>
-						
-						<span>상태 : </span>
-						<c:choose>
-							<c:when test="${UsedShoesList.condition eq 'new'}">
-								새 것
-							</c:when>
-							<c:when test="${UsedShoesList.condition eq 'almostNew'}">
-								거의 새 것
-							</c:when>
-							<c:when test="${UsedShoesList.condition eq 'normal'}">
-								보통
-							</c:when>
-							<c:when test="${UsedShoesList.condition eq 'bad'}">
-								나쁨
-							</c:when>
-						</c:choose>
-						<br>
-						
-						<span>판매가 : ${UsedShoesList.price}원</span>
-						<br>
-						
-						<span>거래방식 : </span>
-						<c:choose>
-							<c:when test="${UsedShoesList.dealMethod eq 'post'}">
-								택배거래
-							</c:when>
-							<c:otherwise>
-								직거래
-							</c:otherwise>
-						</c:choose>
-						<br>
-					</div>
-				</c:forEach>
-			</div>
+				<div class="d-flex scroll-element">
+					<c:forEach var="UsedShoesList" items="${UsedShoesList}">
+						<div class="m-3">
+							<a href="/shoes/detail_view?UsedShoesListId=${UsedShoesList.id}">
+								<img src="${UsedShoesList.imagePath}" class="mainPageShoes-image">
+							</a>
+							
+							<br>
+							<span>${UsedShoesList.category}</span>
+							<br>
+							
+							<c:choose>
+								<c:when test="${fn:length(UsedShoesList.shoesName) <= 23}" >
+									<span>${UsedShoesList.shoesName}</span>
+								</c:when>
+								<c:otherwise>
+									<span>${fn:substring(UsedShoesList.shoesName, 0, 23)}...</span>
+								</c:otherwise>
+							</c:choose>
+							<br>
+							
+							
+							
+							
+							<span>사이즈 : ${UsedShoesList.size}</span>
+							<br>
+							
+							<span>상태 : </span>
+							<c:choose>
+								<c:when test="${UsedShoesList.condition eq 'new'}">
+									새 것
+								</c:when>
+								<c:when test="${UsedShoesList.condition eq 'almostNew'}">
+									거의 새 것
+								</c:when>
+								<c:when test="${UsedShoesList.condition eq 'normal'}">
+									보통
+								</c:when>
+								<c:when test="${UsedShoesList.condition eq 'bad'}">
+									나쁨
+								</c:when>
+							</c:choose>
+							<br>
+							
+							<span>판매가 : ${UsedShoesList.price}원</span>
+							<br>
+							
+							<span>거래방식 : </span>
+							<c:choose>
+								<c:when test="${UsedShoesList.dealMethod eq 'post'}">
+									택배거래
+								</c:when>
+								<c:otherwise>
+									직거래
+								</c:otherwise>
+							</c:choose>
+							<br>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 		

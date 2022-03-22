@@ -10,7 +10,6 @@ import com.shused.project.common.FileManagerService;
 import com.shused.project.shoes.dao.ShoesDAO;
 import com.shused.project.shoes.model.DroppedShoes;
 import com.shused.project.shoes.model.UsedShoes;
-import com.shused.project.user.model.User;
 
 @Service
 public class ShoesBO {
@@ -43,6 +42,10 @@ public class ShoesBO {
 	
 	public List<UsedShoes> getUsedShoesListByUserId(int userId) {
 		return shoesDAO.selectUsedShoesByUserId(userId);
+	}
+	
+	public int deleteShoes(int shoesId, int userId) {
+		return shoesDAO.deleteShoes(shoesId, userId);
 	}
 
 }

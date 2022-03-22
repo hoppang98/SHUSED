@@ -97,4 +97,11 @@
 		WHERE
 			`userId` = #{userId}
 	</select>
+	
+	<delete id="deleteShoes" parameterType="int">
+		DELETE FROM `usedshoes`
+		WHERE
+			`id` = #{shoesId}
+			AND `userId` = #{userId}
+	</delete>
 </mapper>

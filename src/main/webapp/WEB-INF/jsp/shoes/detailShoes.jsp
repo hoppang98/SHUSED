@@ -101,17 +101,19 @@
 			
 			<hr>
 			<div class="d-flex justify-content-center fs-2 fw-bold p-1">상품이미지</div>
-			
+
 			<img src="${usedShoes.imagePath}" class="mainPageShoes-image">
+			<hr>
 			
-			<div class="d-flex justify-content-end">
+			<div class="d-flex justify-content-between">
+				<button class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#deleteModal">상품 삭제하기</button>
 				<button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#buyModal">상품 구매하기</button>
 			</div>
 			
 			
 		</div>
 
-		<!-- Modal -->
+		<!-- 신발 리마인드 Modal -->
 		<div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -156,7 +158,7 @@
 						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sellerinfoModal">구매하기</button>
 					</div>
 					
-					<!-- Modal -->
+					<!-- 판매자 정보 Modal -->
 					<div class="modal fade" id="sellerinfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -174,14 +176,51 @@
 							</div>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>
-	
-	
-	
 
+		<!-- 삭제 Modal -->
+		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">삭제</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">정말 삭제하시겠습니까?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로가기</button>
+						<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="deleteShoesBtn" data-shoes-id="${usedShoes.id}">삭제하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	<script>
+		$(document).ready(function(){
+			$("#deleteShoesBtn").on("click", function(){
+				let shoesId = $(this).data("shoes-id");
+				
+				$.ajax({
+					type:"get"
+					,url:"/shoes/delete"
+					,data:{"shoesId":shoesId}
+					,success:function(data) {
+						if(data.result == "success"){
+							alert("삭제 성공!");
+							location.href="/shoes/mainPage_view";
+						} else {
+							alert("상품 판매자만 삭제가 가능합니다");
+						}
+					}, error:function(){
+						alert("에러발생");
+					}
+				});
+			});
+		});
+	</script>
 	
 	</div>
 

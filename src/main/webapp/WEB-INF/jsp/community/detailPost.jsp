@@ -102,8 +102,8 @@
 				        삭제하시겠습니까?
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-primary">취소</button>
-				        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="deleteBtn" data-delete-id="${post.id}">삭제하기</button>
+				        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-danger" id="deleteBtn" data-delete-id="${post.id}">삭제하기</button>
 				      </div>
 				    </div>
 				  </div>

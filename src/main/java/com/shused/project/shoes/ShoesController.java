@@ -52,6 +52,7 @@ public class ShoesController {
 			@RequestParam("UsedShoesListId") int UsedShoesId,
 			Model model
 			) {
+		
 		UsedShoes usedShoes = shoesBO.getUsedShoesForDetail(UsedShoesId);
 		
 		model.addAttribute("usedShoes", usedShoes);

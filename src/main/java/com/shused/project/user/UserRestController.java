@@ -94,6 +94,7 @@ public class UserRestController {
 			@RequestParam("password") String password,
 			HttpServletRequest request
 			){
+		
 		User user = userBO.getUser(loginId, password);
 		Map<String, String> result = new HashMap<>();
 		

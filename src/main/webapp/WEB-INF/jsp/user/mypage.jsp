@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -24,16 +25,16 @@
 </head>
 <body>
 	<div id="wrap">
-		
+
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		
+
 		<div class="d-flex justify-content-around align-items-center my-3">
-			<a href="#" class="btn btn-info w-50 me-2 fs-2 fw-bold text-white">나의 판매 물품 목록</a>
-			<a href="#" class="btn btn-info w-50 me-2 fs-2 fw-bold text-white">나의 커뮤니티 게시글</a>
+			<button type="button" class="btn btn-info w-50 me-2 fs-2 fw-bold text-white" id="myShoesBtn">나의 판매 물품 목록</button> 
+			<button type="button" class="btn btn-info w-50 me-2 fs-2 fw-bold text-white" id="myCommunityBtn">나의 커뮤니티 게시글</button>
 		</div>
 
-		<div class="d-none">
-			<table class="table text-center border">
+		<div>
+			<table class="table text-center border d-none" id="myCommunity">
 				<thead>
 					<tr>
 						<th><p class="fw-bold fs-5">NO.</p></th>
@@ -47,7 +48,8 @@
 							<td>${post.id}</td>
 							<td><a href="/community/detailPost_view?postId=${post.id}">${post.subject}</a>
 							</td>
-							<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+							<td><fmt:formatDate value="${post.createdAt}"
+									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -55,19 +57,111 @@
 		</div>
 
 
-		<c:forEach var="myUsedShoesList" items="${myUsedShoesList}">
-			<div class="card" style="width: 18rem;">
-				<img src="${myUsedShoesList.imagePath}" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">${myUsedShoesList.shoesName}</h5>
-					<p class="card-text">${myUsedShoesList.price}</p>
-					<a href="#" class="btn btn-primary">상세보기</a>
+		<div class="d-flex" id="myShoes">
+			<div class="scroll-wrap">
+				<c:forEach var="myUsedShoesList" items="${myUsedShoesList}">
+					<div class="scroll-element">
+						<div class="card" style="width:260px;">
+							<a href="/shoes/detail_view?UsedShoesListId=${myUsedShoesList.id}">
+								<img src="${myUsedShoesList.imagePath}" class="card-img-top" style="height: 200px;">
+							</a>
+							<div class="card-body">
+								<h5 class="card-title">판매 ID : ${myUsedShoesList.id}</h5>
+								<c:choose>
+									<c:when test="${fn:length(myUsedShoesList.shoesName) <= 20}">
+										<span>${myUsedShoesList.shoesName}</span>
+									</c:when>
+									<c:otherwise>
+										<span>${fn:substring(myUsedShoesList.shoesName, 0, 20)}...</span>
+									</c:otherwise>
+								</c:choose>
+								<p class="card-text"></p>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">카테고리 : ${myUsedShoesList.category}</li>
+								<li class="list-group-item">모델명 : ${myUsedShoesList.modelNumber}</li>
+								<li class="list-group-item">사이즈 : ${myUsedShoesList.size}</li>
+								<li class="list-group-item">가격 : ${myUsedShoesList.price}원</li>
+								<c:choose>
+									<c:when test="${myUsedShoesList.dealMethod eq 'post'}">
+										<li class="list-group-item">거래방법 : 택배거래</li>
+									</c:when>
+									<c:otherwise>
+										<li class="list-group-item">거래방법 : 직거래</li>
+									</c:otherwise>
+								</c:choose>
+								
+							</ul>
+							<div class="card-body d-flex justify-content-between">
+								<a href="/shoes/detail_view?UsedShoesListId=${myUsedShoesList.id}" class="btn btn-primary w-50">상세보기</a> 
+								<button type="button" class="btn btn-danger w-50 deleteShoesBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-shoes-id="${myUsedShoesList.id}">삭제하기</button>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	
+	
+	<!-- 삭제 Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">삭제</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">정말 삭제하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로가기</button>
+					<button type="button" class="btn btn-danger" id="realDeleteBtn">삭제하기</button>
 				</div>
 			</div>
-		</c:forEach>
-		
-		
-		
+		</div>
 	</div>
+	
+	
+	<script>
+		$(document).ready(function() {
+			$("#myShoesBtn").on("click", function(){
+				$("#myCommunity").addClass("d-none");
+				$("#myShoes").removeClass("d-none");
+			});
+			$("#myCommunityBtn").on("click", function(){
+				$("#myCommunity").removeClass("d-none");
+				$("#myShoes").addClass("d-none");
+			});
+			
+			$(".deleteShoesBtn").on("click", function(e){
+				e.preventDefault();
+				let shoesId = $(this).data("shoes-id");
+				$("#realDeleteBtn").data("shoes-id", shoesId);
+			});
+			
+			$("#realDeleteBtn").on("click", function(e){
+				e.preventDefault();
+				let shoesId = $(this).data("shoes-id");
+				
+				$.ajax({
+					type:"get"
+					,url:"/shoes/delete"
+					,data:{"shoesId":shoesId}
+					,success:function(data) {
+						if(data.result == "success"){
+							alert("삭제 성공!");
+							location.href="/shoes/mainPage_view";
+						} else {
+							alert("상품 판매자만 삭제가 가능합니다");
+						}
+					}, error:function(){
+						alert("에러발생");
+					}
+				});
+			});
+		});
+	</script>
+	
+	</div>
+	
 </body>
 </html>
