@@ -33,7 +33,7 @@
 		<section class="d-flex justify-content-center container-fluid">	
 			<div class="w-100 my-3">
 				<div class="fs-1 fw-bold fst-italic text-center">COMMUNITY</div>
-				
+				<br>
 				<table class="table text-center border">
 					<thead>
 						<tr>

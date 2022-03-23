@@ -47,7 +47,7 @@
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="categoryInput" id="newBalance" value="newBalance"> 
+					<input class="form-check-input" type="radio" name="categoryInput" id="newBalance" value="newbalance"> 
 					<label class="form-check-label" for="newBalance"> 
 						<img src="/static/image/new balance logo.png" class="logoImage-forDropped me-4">
 					</label>
@@ -258,6 +258,7 @@
 			}
 			
 			var formData = new FormData();
+
 			formData.append("category", category);
 			formData.append("modelNumber", modelNumber);
 			formData.append("shoesName", shoesName);
@@ -269,6 +270,14 @@
 			formData.append("state", state);
 			formData.append("place", place);
 			formData.append("uploadFile", $("#fileInput")[0].files[0]);
+			
+			//var inputFile = $("input[name='fileInput']");
+			//var files = inputFile[0].files;
+			//console.log(files);
+			//for(var i = 0; i < files.length; i++){
+			//	formData.append("uploadFile", files[i]);
+			//}
+			
 			
 			$.ajax({
 				type:"post"

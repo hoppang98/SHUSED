@@ -257,7 +257,7 @@
 					,success:function(data) {
 						if(data.result == "success"){
 							alert("판매완료!");
-							location.href="/shoes/mainPage_view";
+							location.reload();
 						} else {
 							alert("상품 판매자만 판매완료 설정이 가능합니다");
 						}

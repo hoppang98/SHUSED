@@ -18,6 +18,7 @@ public class ShoesBO {
 	private ShoesDAO shoesDAO;
 	
 	public int addDroppedShoes(int userId, String nickname, String category, String modelNumber, String shoesName, String date, MultipartFile file) {
+		
 		String filePath = FileManagerService.saveRecentlyDroppedFile(userId, file);
 		return shoesDAO.insertDroppedShoes(userId, nickname, category, modelNumber, shoesName, date, filePath);
 	}

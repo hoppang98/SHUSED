@@ -65,8 +65,11 @@ public class ShoesController {
 			@RequestParam("searchKeyword") String searchKeyword,
 			Model model
 			) {
+		
 		List<UsedShoes> usedShoesSearchList = shoesBO.getUsedShoesListForSearch(searchKeyword);
 		model.addAttribute("usedShoesSearchList", usedShoesSearchList);
+		
+		model.addAttribute("searchKeyword", searchKeyword);
 		
 		return "/shoes/searchShoes";
 	}

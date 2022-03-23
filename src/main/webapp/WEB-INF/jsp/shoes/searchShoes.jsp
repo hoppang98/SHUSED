@@ -28,10 +28,64 @@
 
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
-		<c:forEach var="usedShoesSearchList" items="${usedShoesSearchList}">
-			<span>${usedShoesSearchList.id}</span>
-			<span>${usedShoesSearchList.category}</span>
-		</c:forEach>
+		
+		<div class="d-flex justify-content-center p-3">
+			<span class="fs-2 fw-bold fst-italic">검색어 : ${searchKeyword}</span>
+		</div>
+		
+		<div class="d-flex p-3">
+			<div class="scroll-wrap">
+				<c:forEach var="usedShoesSearchList" items="${usedShoesSearchList}">
+					<div class="scroll-element">
+						<div class="card" style="width:260px;">
+							<a href="/shoes/detail_view?UsedShoesListId=${usedShoesSearchList.id}">
+								<img src="${usedShoesSearchList.imagePath}" class="card-img-top" style="height: 200px;">
+							</a>
+							<div class="card-body">
+								<h5 class="card-title">판매 ID : ${usedShoesSearchList.id}</h5>
+								<c:choose>
+									<c:when test="${fn:length(usedShoesSearchList.shoesName) <= 20}">
+										<span>${usedShoesSearchList.shoesName}</span>
+									</c:when>
+									<c:otherwise>
+										<span>${fn:substring(usedShoesSearchList.shoesName, 0, 20)}...</span>
+									</c:otherwise>
+								</c:choose>
+								<p class="card-text"></p>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">카테고리 : ${usedShoesSearchList.category}</li>
+								<li class="list-group-item">모델명 : ${usedShoesSearchList.modelNumber}</li>
+								<li class="list-group-item">사이즈 : ${usedShoesSearchList.size}</li>
+								<li class="list-group-item">가격 : ${usedShoesSearchList.price}원</li>
+								<c:choose>
+									<c:when test="${usedShoesSearchList.dealMethod eq 'post'}">
+										<li class="list-group-item">거래방법 : 택배거래</li>
+									</c:when>
+									<c:otherwise>
+										<li class="list-group-item">거래방법 : 직거래</li>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${usedShoesSearchList.state eq true}">
+										<li class="list-group-item">판매여부 : 판매중</li>
+									</c:when>
+									<c:otherwise>
+										<li class="list-group-item">판매여부 : 판매완료</li>
+									</c:otherwise>
+								</c:choose>
+
+							</ul>
+							<div class="card-body d-flex justify-content-between">
+								<a href="/shoes/detail_view?UsedShoesListId=${usedShoesSearchList.id}" class="btn btn-primary w-50">상세보기</a> 
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+		
+		
 	</div>
 </body>
 </html>

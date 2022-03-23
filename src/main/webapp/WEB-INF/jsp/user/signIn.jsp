@@ -46,10 +46,9 @@
 						<input type="password" class="form-control" placeholder="비밀번호" id="passwordInput">
 							
 						<button type="submit" class="btn btn-info w-100 text-light mt-4" id="joinBtn">로그인</button>
-						
-
 					</div>
 				</form>
+				
 				<div class="d-flex align-items-center justify-content-center mt-1">
 					<hr class="w-25"><span class="mx-5 text-secondary">또는</span><hr class="w-25">
 				</div>

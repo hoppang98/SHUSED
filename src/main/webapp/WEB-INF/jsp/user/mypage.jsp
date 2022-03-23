@@ -90,6 +90,14 @@
 										<li class="list-group-item">거래방법 : 직거래</li>
 									</c:otherwise>
 								</c:choose>
+								<c:choose>
+									<c:when test="${myUsedShoesList.state eq true}">
+										<li class="list-group-item">판매여부 : 판매중</li>
+									</c:when>
+									<c:otherwise>
+										<li class="list-group-item">판매여부 : 판매완료</li>
+									</c:otherwise>
+								</c:choose>
 								
 							</ul>
 							<div class="card-body d-flex justify-content-between">

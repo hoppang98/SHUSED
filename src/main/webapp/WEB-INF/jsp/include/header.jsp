@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header class="d-flex align-items-center justify-content-between border-bottom border-info border-3">
-	<a href="/shoes/mainPage_view" class="fs-1 p-2 fw-bold fst-italic">SHUSED</a>
+	<a href="/shoes/mainPage_view" class="fs-1 p-2 fw-bold fst-italic text-decoration-none">SHUSED</a>
 	<div class="p-1">
 	
 		<c:choose>
@@ -19,16 +19,19 @@
 			</c:otherwise>
 		</c:choose>
 		
-		<div class="d-flex align-items-center justify-content-center mt-1">
+
+		<form id="searchForm" class="d-flex align-items-center justify-content-center mt-1">
 			<input type="text" class="form-control" placeholder="검색" id="searchShoesInput">
-			<button type="button" class="btn btn-outline-secondary" id="searchShoesBtn"><i class="bi bi-search"></i></button>
-		</div>
-123123
+			<button type="submit" class="btn btn-outline-secondary" id="searchShoesBtn"><i class="bi bi-search"></i></button>
+		</form>
+
 
 	<script>
 	$(document).ready(function(){
-		$("#searchShoesBtn").on("click", function(){
-			let searchKeyword = $("#searchShoesInput").val();
+		$("#searchForm").on("submit", function(e){
+			e.preventDefault();
+			
+			var searchKeyword = $("#searchShoesInput").val();
 			location.href="/shoes/search_view?searchKeyword=" + searchKeyword;
 		});
 	});

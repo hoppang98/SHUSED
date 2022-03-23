@@ -31,10 +31,10 @@
 		<!-- 로고 이미지 -->
 		<div class="d-flex justify-content-around align-items-center border-bottom border-info border-3 mt-2">
 			<div class="mb-2">
-				<img src="/static/image/adidas logo.jpg" class="logoImage">
-				<img src="/static/image/jordan logo.png" class="logoImage">
-				<img src="/static/image/new balance logo.png" class="logoImage">
-				<img src="/static/image/nike_logo_thumbnail.png" class="logoImage">
+				<a href="/shoes/search_view?searchKeyword=adidas"><img src="/static/image/adidas logo.jpg" class="logoImage"></a>
+				<a href="/shoes/search_view?searchKeyword=jordan"><img src="/static/image/jordan logo.png" class="logoImage"></a>
+				<a href="/shoes/search_view?searchKeyword=newbalance"><img src="/static/image/new balance logo.png" class="logoImage"></a>
+				<a href="/shoes/search_view?searchKeyword=nike"><img src="/static/image/nike_logo_thumbnail.png" class="logoImage"></a>
 			</div>
 		</div>
 		
@@ -108,6 +108,16 @@
 								</c:otherwise>
 							</c:choose>
 							<br>
+							
+							<span>판매여부 : </span>
+							<c:choose>
+								<c:when test="${UsedShoesList.state eq true}">
+									판매중
+								</c:when>
+								<c:otherwise>
+									판매완료
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</c:forEach>
 				</div>
@@ -126,7 +136,9 @@
 			<div class="d-flex scroll-element">
 				<c:forEach var="DroppedShoesList" items="${DroppedShoesList}">
 					<div class="m-3">
-						<img src="${DroppedShoesList.imagePath}" class="mainPageShoes-image">
+						<a href="/shoes/search_view?searchKeyword=${DroppedShoesList.modelNumber}">
+							<img src="${DroppedShoesList.imagePath}" class="mainPageShoes-image">
+						</a>
 						<br>
 						<span>${DroppedShoesList.category}</span>
 						<br>

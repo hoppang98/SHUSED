@@ -50,8 +50,8 @@
 			,`dealMethod`
 			,`place`
 			,`explanation`
-			,`state`
 			,`imagePath`
+			,`state`
 			,`createdAt`
 			,`updatedAt`
 		)
@@ -69,8 +69,8 @@
 			,#{dealMethod}
 			,#{place}
 			,#{explanation}
-			,#{state}
 			,#{imagePath}
+			,#{state}
 			,now()
 			,now()
 		)
@@ -124,5 +124,21 @@
 			`shoesName` LIKE CONCAT ('%', #{searchKeyword}, '%')
 		OR
 			`modelNumber` LIKE CONCAT ('%', #{searchKeyword}, '%')
+		OR
+			`category` LIKE CONCAT ('%', #{searchKeyword}, '%')
 	</select>
+	
+	
+	<insert id="insertUsedShoesImage" parameterType="map">
+		INSERT INTO `usedshoesimages`
+		(
+			`imagePath`
+			,`createdAt`
+		)
+		VALUES
+		(
+			#{fileList}
+			,now()
+		)
+	</insert>
 </mapper>
