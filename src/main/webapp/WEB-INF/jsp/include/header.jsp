@@ -23,7 +23,7 @@
 			<input type="text" class="form-control" placeholder="검색" id="searchShoesInput">
 			<button type="button" class="btn btn-outline-secondary" id="searchShoesBtn"><i class="bi bi-search"></i></button>
 		</div>
-
+123123
 
 	<script>
 	$(document).ready(function(){
