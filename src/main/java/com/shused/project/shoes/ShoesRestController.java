@@ -1,5 +1,6 @@
 package com.shused.project.shoes;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shused.project.shoes.bo.ShoesBO;
-import com.shused.project.shoes.model.UsedShoes;
 
 @RestController
 public class ShoesRestController {
@@ -63,19 +62,22 @@ public class ShoesRestController {
 			@RequestParam("explanation") String explanation,
 			@RequestParam("state") boolean state,
 			@RequestParam("place") String place,
-			@RequestParam("uploadFile") MultipartFile file,
+			@RequestParam("uploadFile") List<MultipartFile> fileList,
 			HttpServletRequest request
-			){
+			) throws IOException{
 		HttpSession session = request.getSession();
 		
 		int userId = (Integer)session.getAttribute("userId");
 		String nickname = (String)session.getAttribute("nickname");
 		String phoneNumber = (String)session.getAttribute("phoneNumber");
 		
-		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, file);
+		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place);
+		
+		// 위 내용 저장과 동시에 판매 상품의 pk값 가져오는 방법 - useGeneratedKeys
+		int count2 = shoesBO.addFilePath(userId, fileList);
 		
 		Map<String, String> result = new HashMap<>();
-		if(count == 1) {
+		if(count == 1 && count2 == 1) {
 			result.put("result", "success");
 		} else {
 			result.put("result", "fail");

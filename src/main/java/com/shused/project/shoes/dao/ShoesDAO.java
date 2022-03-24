@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shused.project.shoes.model.DroppedShoes;
 import com.shused.project.shoes.model.UsedShoes;
@@ -36,8 +37,12 @@ public interface ShoesDAO {
 			@Param("dealMethod") String dealMethod, 
 			@Param("explanation") String explanation, 
 			@Param("state") boolean state,
-			@Param("place") String place, 
-			@Param("imagePath") String imagePath
+			@Param("place") String place
+			//@Param("imagePath") String imagePath
+			);
+	public int insertFilePath(
+			@Param("userId") int userId,
+			@Param("fileList") List<MultipartFile> fileList
 			);
 	
 	public List<UsedShoes> selectUsedShoes();

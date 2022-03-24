@@ -252,10 +252,11 @@
 				alert("제품설명를 입력해주세요");
 				return;
 			}
-			if($("#fileInput")[0].files.length == 0) {	
-				alert("파일을 선택해주세요");
-				return;
-			}
+			
+			//if($("#fileInput")[0].files.length == 0) {	
+			//	alert("파일을 선택해주세요");
+			//	return;
+			//}
 			
 			var formData = new FormData();
 
@@ -269,14 +270,17 @@
 			formData.append("explanation", explanation);
 			formData.append("state", state);
 			formData.append("place", place);
-			formData.append("uploadFile", $("#fileInput")[0].files[0]);
 			
-			//var inputFile = $("input[name='fileInput']");
-			//var files = inputFile[0].files;
-			//console.log(files);
-			//for(var i = 0; i < files.length; i++){
-			//	formData.append("uploadFile", files[i]);
-			//}
+			//단일 파일 업로드
+			//formData.append("uploadFile", $("#fileInput")[0].files[0]);
+			
+			// 다중파일 업로드
+			var inputFile = $("input[name='fileInput']");
+			var files = inputFile[0].files;
+			console.log(files);
+			for(var i = 0; i < files.length; i++){
+				formData.append("uploadFile", files[i]);
+			}
 			
 			
 			$.ajax({

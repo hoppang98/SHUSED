@@ -1,5 +1,6 @@
 package com.shused.project.shoes.bo;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,13 @@ public class ShoesBO {
 	}
 	
 	
-	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place, MultipartFile file) {
-		String filePath = FileManagerService.saveUsedShoesFile(userId, file);
-		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, filePath);
+	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place) {
+		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place);
+	} // 여기서 사진 업로드까지 처리하기.... 아래는 지워야겠네
+	
+	public List<String> addFilePath(int userId, List<MultipartFile> fileList) {
+		List<String> filePath = FileManagerService.saveUsedShoesFile(userId, fileList);
+		return 
 	}
 	
 	public List<UsedShoes> getUsedShoesList() {
@@ -45,11 +50,11 @@ public class ShoesBO {
 		return shoesDAO.selectUsedShoesByUserId(userId);
 	}
 	
-	public int deleteShoes(int shoesId, int userId) {
-		UsedShoes usedShoes = shoesDAO.selectUsedShoesForDetail(shoesId);
-		FileManagerService.removeUsedShoesFile(usedShoes.getImagePath());
-		return shoesDAO.deleteShoes(shoesId, userId);
-	}
+//	public int deleteShoes(int shoesId, int userId) {
+//		UsedShoes usedShoes = shoesDAO.selectUsedShoesForDetail(shoesId);
+//		FileManagerService.removeUsedShoesFile(usedShoes.getImagePath());
+//		return shoesDAO.deleteShoes(shoesId, userId);
+//	}
 	
 	public int soldOutShoes(int shoesId, int userId) {
 		return shoesDAO.soldOutShoes(shoesId, userId);

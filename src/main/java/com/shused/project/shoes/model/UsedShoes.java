@@ -17,7 +17,7 @@ public class UsedShoes {
 	public String place;
 	public String explanation;
 	public boolean state;
-	public String imagePath;
+	//public String imagePath;
 	public Date createdAt; 
 	public Date updatedAt;
 	
@@ -105,12 +105,12 @@ public class UsedShoes {
 	public void setExplanation(String explanation) {
 		this.explanation = explanation;
 	}
-	public String getImagePath() {
-		return imagePath;
-	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
+	//public String getImagePath() {
+	//	return imagePath;
+	//}
+	//public void setImagePath(String imagePath) {
+	//	this.imagePath = imagePath;
+	//}
 	public Date getCreatedAt() {
 		return createdAt;
 	}

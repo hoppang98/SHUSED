@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,34 +86,35 @@ public class FileManagerService {
 	
 	
 	// 판매 신발 파일 저장
-	public static String saveUsedShoesFile(int userId, MultipartFile file) {
+	public static List<String> saveUsedShoesFile(int userId, List<MultipartFile> fileList) throws IOException {
 
-		if (file == null) {
+		if (fileList == null) {
 			return null;
 		}
 
 		String directioryName = userId + "_" + System.currentTimeMillis() + "/";
 
 		String filePath = USED_SHOES_FILE_UPLOAD_PATH + directioryName;
-
-		File directiory = new File(filePath);
-		if (directiory.mkdir() == false) {
-			return null;
-		}
-
-		try {
+		
+		List<String> realFilePath = new ArrayList<String>();
+		
+		for(MultipartFile file : fileList) {
+			File directiory = new File(filePath);
+			if (directiory.mkdir() == false) {
+				return null;
+			}
 			byte[] bytes = file.getBytes();
 			Path path = Paths.get(filePath + file.getOriginalFilename());
 			Files.write(path, bytes);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+			logger.info("/usedShoesImages/" + directioryName + file.getOriginalFilename());
+			String realPath = "/usedShoesImages/" + directioryName + file.getOriginalFilename();
+			realFilePath.add(realPath);
+			}
+		
+			return realFilePath; // 이렇게 완성, 이후 dao나 mapper에서 반복문을 돌려서 저장한다?
 		}
 
-		logger.info("/usedShoesImages/" + directioryName + file.getOriginalFilename());
-		return "/usedShoesImages/" + directioryName + file.getOriginalFilename();
-	}
+	
 		
 		
 	
