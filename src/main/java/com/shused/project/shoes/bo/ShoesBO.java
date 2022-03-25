@@ -29,14 +29,17 @@ public class ShoesBO {
 	}
 	
 	
-	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place) {
+	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place, List<MultipartFile> fileList) {
+
+		List<String> fileListForInsert = FileManagerService.saveUsedShoesFile(userId, fileList);
 		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place);
-	} // 여기서 사진 업로드까지 처리하기.... 아래는 지워야겠네
+	} // 여기서 사진 업로드까지 처리하기....
 	
-	public List<String> addFilePath(int userId, List<MultipartFile> fileList) {
-		List<String> filePath = FileManagerService.saveUsedShoesFile(userId, fileList);
-		return 
-	}
+	//public List<String> addFilePath(int userId, List<MultipartFile> fileList) {
+	//	List<String> filePath = FileManagerService.saveUsedShoesFile(userId, fileList);
+	//	return 
+	//}
+
 	
 	public List<UsedShoes> getUsedShoesList() {
 		return shoesDAO.selectUsedShoes();

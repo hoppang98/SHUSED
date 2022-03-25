@@ -64,20 +64,20 @@ public class ShoesRestController {
 			@RequestParam("place") String place,
 			@RequestParam("uploadFile") List<MultipartFile> fileList,
 			HttpServletRequest request
-			) throws IOException{
+			) {
 		HttpSession session = request.getSession();
 		
 		int userId = (Integer)session.getAttribute("userId");
 		String nickname = (String)session.getAttribute("nickname");
 		String phoneNumber = (String)session.getAttribute("phoneNumber");
 		
-		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place);
+		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, fileList);
 		
 		// 위 내용 저장과 동시에 판매 상품의 pk값 가져오는 방법 - useGeneratedKeys
-		int count2 = shoesBO.addFilePath(userId, fileList);
+		//int count2 = shoesBO.addFilePath(userId, fileList);
 		
 		Map<String, String> result = new HashMap<>();
-		if(count == 1 && count2 == 1) {
+		if(count == 1) {
 			result.put("result", "success");
 		} else {
 			result.put("result", "fail");

@@ -38,12 +38,11 @@ public interface ShoesDAO {
 			@Param("explanation") String explanation, 
 			@Param("state") boolean state,
 			@Param("place") String place
+			//@Param("fileListForInsert") List<String> fileListForInsert
 			//@Param("imagePath") String imagePath
 			);
-	public int insertFilePath(
-			@Param("userId") int userId,
-			@Param("fileList") List<MultipartFile> fileList
-			);
+	
+	public UsedShoes insertFileListForInsert(@Param("usedShoesId") int usedShoesId);
 	
 	public List<UsedShoes> selectUsedShoes();
 	

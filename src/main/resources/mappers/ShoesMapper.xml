@@ -35,7 +35,7 @@
 		ORDER BY `createdAt` DESC
 	</select>
 	
-	<insert id="insertUsedShoes" parameterType="map">
+	<insert id="insertUsedShoes" parameterType="com.shused.project.shoes.model.UsedShoes" useGeneratedKeys="true" keyProperty="usedShoesId">
 			INSERT INTO `usedshoes`
 		(
 			`userId`
@@ -78,7 +78,6 @@
 		INSERT INTO `usedshoesimages`
 		(
 			`userId`
-			,`
 			,`createdAt`
 		)
 		VALUES
@@ -88,6 +87,7 @@
 			,now()
 		)
 	</insert>
+	
 	
 	<select id="selectUsedShoes" resultType="com.shused.project.shoes.model.UsedShoes">
 		SELECT *
