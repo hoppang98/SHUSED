@@ -35,7 +35,7 @@
 		ORDER BY `createdAt` DESC
 	</select>
 	
-	<insert id="insertUsedShoes" parameterType="com.shused.project.shoes.model.UsedShoes" useGeneratedKeys="true" keyProperty="usedShoesId">
+	<insert id="insertUsedShoes" parameterType="com.shused.project.shoes.model.UsedShoes" useGeneratedKeys="true" keyProperty="id">
 			INSERT INTO `usedshoes`
 		(
 			`userId`
@@ -74,18 +74,24 @@
 		)
 	</insert>
 	
-	<insert id ="insertFilePath" parameterType="map">
-		INSERT INTO `usedshoesimages`
-		(
-			`userId`
-			,`createdAt`
-		)
-		VALUES
-		(
-			#{userId}
-			,#{imagePath}
-			,now()
-		)
+	<insert id ="insertFileListForInsert" parameterType="map">
+	<!-- 파일 갯수만큼 반복문 돌리기 -->
+		<if test="fileListForInsert.size != 0">
+			INSERT INTO `usedshoesimages`
+			(
+				`usedShoesId`
+				,`imagePath`
+				,`createdAt`
+			)
+			<foreach collection="fileListForInsert" item="item" separator=",">
+			VALUES
+			(
+				#{id}
+				,#{imagePath}
+				,now()
+			)
+			</foreach>
+		</if>
 	</insert>
 	
 	

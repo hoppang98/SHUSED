@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.shused.project.shoes.model.DroppedShoes;
 import com.shused.project.shoes.model.UsedShoes;
@@ -22,27 +21,47 @@ public interface ShoesDAO {
 			@Param("imagePath") String imagePath
 			);
 
+	
+	
+	
 	public List<DroppedShoes> selectDroppesShoes();
 	
-	public int insertUsedShoes(
-			@Param("userId") int userId,
-			@Param("nickname") String nickname,
-			@Param("phoneNumber") String phoneNumber,
-			@Param("category") String category,
-			@Param("modelNumber") String modelNumber,
-			@Param("shoesName") String shoesName,
-			@Param("size") int size, 
-			@Param("price") int price, 
-			@Param("condition") String condition, 
-			@Param("dealMethod") String dealMethod, 
-			@Param("explanation") String explanation, 
-			@Param("state") boolean state,
-			@Param("place") String place
+	
+	
+	
+	
+	// 판매 신발 저장
+	public int insertUsedShoes(UsedShoes usedShoes);
+
+	public UsedShoes insertFileListForInsert(
+			@Param("id") int id
+			,@Param("fileListForInsert") List<String> fileListForInsert
+			); // map처럼 만들어야한다. -> 모델객체로 해보자
+	
+	
+	
+//	public int insertUsedShoes(
+//			@Param("userId") int userId,
+//			@Param("nickname") String nickname,
+//			@Param("phoneNumber") String phoneNumber,
+//			@Param("category") String category,
+//			@Param("modelNumber") String modelNumber,
+//			@Param("shoesName") String shoesName,
+//			@Param("size") int size, 
+//			@Param("price") int price, 
+//			@Param("condition") String condition, 
+//			@Param("dealMethod") String dealMethod, 
+//			@Param("explanation") String explanation, 
+//			@Param("state") boolean state,
+//			@Param("place") String place
 			//@Param("fileListForInsert") List<String> fileListForInsert
 			//@Param("imagePath") String imagePath
-			);
+			//);
 	
-	public UsedShoes insertFileListForInsert(@Param("usedShoesId") int usedShoesId);
+
+	
+	
+	
 	
 	public List<UsedShoes> selectUsedShoes();
 	

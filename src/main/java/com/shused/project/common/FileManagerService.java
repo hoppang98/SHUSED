@@ -14,10 +14,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
 	
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	public final static String RECTNTLY_DROPPED_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\recentlyDroppedImages/";
 	public final static String USED_SHOES_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\usedShoesImages/";
 	public final static String COMMUNITY_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\communityImages/";
 	
+<<<<<<< Updated upstream
+=======
+	//배포시 아래쪽으로 변경
+//	public final static String RECTNTLY_DROPPED_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/recentlyDroppedImages/";
+//	public final static String USED_SHOES_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/usedShoesImages/";
+//	public final static String COMMUNITY_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/communityImages/";
+>>>>>>> Stashed changes
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	
 	// 최근 발매 신발 파일 저장
@@ -86,7 +97,7 @@ public class FileManagerService {
 	
 	
 	// 판매 신발 파일 저장
-	public static List<String> saveUsedShoesFile(int userId, List<MultipartFile> fileList) throws IOException {
+	public static List<String> saveUsedShoesFile(int userId, List<MultipartFile> fileList) {
 
 		if (fileList == null) {
 			return null;
@@ -98,20 +109,36 @@ public class FileManagerService {
 		
 		List<String> realFilePath = new ArrayList<String>();
 		
-		for(MultipartFile file : fileList) {
-			File directiory = new File(filePath);
-			if (directiory.mkdir() == false) {
-				return null;
-			}
-			byte[] bytes = file.getBytes();
-			Path path = Paths.get(filePath + file.getOriginalFilename());
-			Files.write(path, bytes);
-			logger.info("/usedShoesImages/" + directioryName + file.getOriginalFilename());
-			String realPath = "/usedShoesImages/" + directioryName + file.getOriginalFilename();
-			realFilePath.add(realPath);
-			}
 		
-			return realFilePath; // 이렇게 완성, 이후 dao나 mapper에서 반복문을 돌려서 저장한다?
+		File directiory = new File(filePath);
+		if (directiory.mkdir() == false) {
+			return null;
+		}
+		
+		
+		for(MultipartFile file : fileList) {
+
+			
+			
+				byte[] bytes;
+				
+				
+				try {
+					bytes = file.getBytes();
+					Path path = Paths.get(filePath + file.getOriginalFilename());
+					Files.write(path, bytes);
+					logger.info("/usedShoesImages/" + directioryName + file.getOriginalFilename());
+					String realPath = "/usedShoesImages/" + directioryName + file.getOriginalFilename();
+					realFilePath.add(realPath);
+					
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}	
+		
+			return realFilePath; // 이렇게 완성, 이후 dao나 mapper에서 반복문을 돌려서 저장한다
 		}
 
 	

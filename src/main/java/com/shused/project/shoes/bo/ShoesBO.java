@@ -1,6 +1,5 @@
 package com.shused.project.shoes.bo;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.shused.project.common.FileManagerService;
 import com.shused.project.shoes.dao.ShoesDAO;
 import com.shused.project.shoes.model.DroppedShoes;
+import com.shused.project.shoes.model.InputFile;
 import com.shused.project.shoes.model.UsedShoes;
 
 @Service
@@ -30,9 +30,33 @@ public class ShoesBO {
 	
 	
 	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place, List<MultipartFile> fileList) {
-
+		
 		List<String> fileListForInsert = FileManagerService.saveUsedShoesFile(userId, fileList);
-		return shoesDAO.insertUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place);
+		
+		UsedShoes usedShoes;
+		usedShoes = new UsedShoes();
+		usedShoes.setUserId(userId);
+		usedShoes.setNickname(nickname);
+		usedShoes.setPhoneNumber(phoneNumber);
+		usedShoes.setCategory(category);
+		usedShoes.setModelNumber(modelNumber);
+		usedShoes.setShoesName(shoesName);
+		usedShoes.setSize(size);
+		usedShoes.setPrice(price);
+		usedShoes.setCondition(condition);
+		usedShoes.setDealMethod(dealMethod);
+		usedShoes.setExplanation(explanation);
+		usedShoes.setState(state);
+		usedShoes.setPlace(place);
+		usedShoes.setFileListForInsert(fileListForInsert);
+
+		InputFile inputfile;
+		inputfile.setUsedShoesId(id);
+		
+		shoesDAO.insertFileListForInsert(userId, fileListForInsert);
+		return shoesDAO.insertUsedShoes(usedShoes);
+		
+		
 	} // 여기서 사진 업로드까지 처리하기....
 	
 	//public List<String> addFilePath(int userId, List<MultipartFile> fileList) {
