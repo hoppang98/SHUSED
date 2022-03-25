@@ -14,9 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
 	
-	public final static String RECTNTLY_DROPPED_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\recentlyDroppedImages/";
-	public final static String USED_SHOES_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\usedShoesImages/";
-	public final static String COMMUNITY_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\communityImages/";
+
+	public final static String RECTNTLY_DROPPED_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/recentlyDroppedImages/";
+	public final static String USED_SHOES_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/usedShoesImages/";
+	public final static String COMMUNITY_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/communityImages/";
 	
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	
