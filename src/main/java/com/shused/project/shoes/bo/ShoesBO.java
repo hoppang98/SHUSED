@@ -48,12 +48,16 @@ public class ShoesBO {
 		usedShoes.setExplanation(explanation);
 		usedShoes.setState(state);
 		usedShoes.setPlace(place);
-		usedShoes.setFileListForInsert(fileListForInsert);
+		//usedShoes.setFileListForInsert(fileListForInsert);
 
-		InputFile inputfile;
-		inputfile.setUsedShoesId(id);
 		
-		shoesDAO.insertFileListForInsert(userId, fileListForInsert);
+		InputFile inputfile;
+		inputfile = new InputFile();
+		inputfile.setUsedShoesId(usedShoes.getId());
+		inputfile.setImagePath(fileListForInsert);
+		
+		shoesDAO.insertFileListForInsert(inputfile);
+		
 		return shoesDAO.insertUsedShoes(usedShoes);
 		
 		

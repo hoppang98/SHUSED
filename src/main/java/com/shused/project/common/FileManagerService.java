@@ -13,22 +13,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
-	
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 	public final static String RECTNTLY_DROPPED_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\recentlyDroppedImages/";
 	public final static String USED_SHOES_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\usedShoesImages/";
 	public final static String COMMUNITY_FILE_UPLOAD_PATH = "C:\\손지승\\New_Study\\1-3. MyProject\\communityImages/";
 	
-<<<<<<< Updated upstream
-=======
+
 	//배포시 아래쪽으로 변경
 //	public final static String RECTNTLY_DROPPED_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/recentlyDroppedImages/";
 //	public final static String USED_SHOES_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/usedShoesImages/";
 //	public final static String COMMUNITY_FILE_UPLOAD_PATH = "/home/ec2-user/shused/upload/images/communityImages/";
->>>>>>> Stashed changes
+
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	
 	// 최근 발매 신발 파일 저장

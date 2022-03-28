@@ -75,6 +75,7 @@ public class ShoesRestController {
 		
 		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, fileList);
 		
+		
 		// 위 내용 저장과 동시에 판매 상품의 pk값 가져오는 방법 - useGeneratedKeys
 		
 		Map<String, String> result = new HashMap<>();

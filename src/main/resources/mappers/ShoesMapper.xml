@@ -74,17 +74,17 @@
 		)
 	</insert>
 	
-	<insert id ="insertFileListForInsert" parameterType="map">
+	<insert id ="insertFileListForInsert" parameterType="com.shused.project.shoes.model.InputFile">
 	<!-- 파일 갯수만큼 반복문 돌리기 -->
-		<if test="fileListForInsert.size != 0">
+		<if test="imagePath.size != 0">
 			INSERT INTO `usedshoesimages`
 			(
 				`usedShoesId`
 				,`imagePath`
 				,`createdAt`
 			)
-			<foreach collection="fileListForInsert" item="item" separator=",">
 			VALUES
+			<foreach collection="imagePath" item="item" separator=",">
 			(
 				#{id}
 				,#{imagePath}

@@ -8,6 +8,7 @@ public class InputFile {
 	public int usedShoesId;
 	public List<String> imagePath;
 	public Date createdAt;
+	
 	public int getId() {
 		return id;
 	}

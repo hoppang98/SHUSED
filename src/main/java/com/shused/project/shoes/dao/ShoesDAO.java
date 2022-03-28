@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shused.project.shoes.model.DroppedShoes;
+import com.shused.project.shoes.model.InputFile;
 import com.shused.project.shoes.model.UsedShoes;
 
 @Repository
@@ -32,11 +33,14 @@ public interface ShoesDAO {
 	
 	// 판매 신발 저장
 	public int insertUsedShoes(UsedShoes usedShoes);
-
-	public UsedShoes insertFileListForInsert(
-			@Param("id") int id
-			,@Param("fileListForInsert") List<String> fileListForInsert
-			); // map처럼 만들어야한다. -> 모델객체로 해보자
+	
+	//판매 신발 사진 저장
+	public int insertFileListForInsert(InputFile inputfile);
+	
+//	public UsedShoes insertFileListForInsert(
+//			@Param("id") int id
+//			,@Param("fileListForInsert") List<String> fileListForInsert
+//			); // map처럼 만들어야한다. -> 모델객체로 해보자
 	
 	
 	

@@ -1,7 +1,6 @@
 package com.shused.project.shoes.model;
 
 import java.util.Date;
-import java.util.List;
 
 public class UsedShoes {
 	public int id;
@@ -18,19 +17,19 @@ public class UsedShoes {
 	public String place;
 	public String explanation;
 	public boolean state;
-	public List<String> fileListForInsert;
+	//public List<String> fileListForInsert;
 	//public String imagePath;
 	public Date createdAt; 
 	public Date updatedAt;
 	
 	
 	
-	public List<String> getFileListForInsert() {
-		return fileListForInsert;
-	}
-	public void setFileListForInsert(List<String> fileListForInsert) {
-		this.fileListForInsert = fileListForInsert;
-	}
+//	public List<String> getFileListForInsert() {
+//		return fileListForInsert;
+//	}
+//	public void setFileListForInsert(List<String> fileListForInsert) {
+//		this.fileListForInsert = fileListForInsert;
+//	}
 	public boolean isState() {
 		return state;
 	}
