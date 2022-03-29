@@ -28,10 +28,10 @@ public class ShoesBO {
 		return shoesDAO.selectDroppesShoes();
 	}
 	
+
+	
 	
 	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place, List<MultipartFile> fileList) {
-		
-		List<String> fileListForInsert = FileManagerService.saveUsedShoesFile(userId, fileList);
 		
 		UsedShoes usedShoes;
 		usedShoes = new UsedShoes();
@@ -49,19 +49,16 @@ public class ShoesBO {
 		usedShoes.setState(state);
 		usedShoes.setPlace(place);
 		//usedShoes.setFileListForInsert(fileListForInsert);
-
+		shoesDAO.insertUsedShoes(usedShoes);
 		
+		List<String> fileListForInsert = FileManagerService.saveUsedShoesFile(userId, fileList);
 		InputFile inputfile;
 		inputfile = new InputFile();
 		inputfile.setUsedShoesId(usedShoes.getId());
 		inputfile.setImagePath(fileListForInsert);
 		
-		shoesDAO.insertFileListForInsert(inputfile);
-		
-		return shoesDAO.insertUsedShoes(usedShoes);
-		
-		
-	} // 여기서 사진 업로드까지 처리하기....
+		return shoesDAO.insertFileListForInsert(inputfile);
+	} 
 	
 	//public List<String> addFilePath(int userId, List<MultipartFile> fileList) {
 	//	List<String> filePath = FileManagerService.saveUsedShoesFile(userId, fileList);
@@ -73,6 +70,10 @@ public class ShoesBO {
 		return shoesDAO.selectUsedShoes();
 	}
 	
+	public List<InputFile> getInputFileList() {
+		return shoesDAO.selectInputFile();
+	}
+	
 	public UsedShoes getUsedShoesForDetail (int UsedShoesId) {
 		return shoesDAO.selectUsedShoesForDetail(UsedShoesId);
 	}
@@ -81,11 +82,10 @@ public class ShoesBO {
 		return shoesDAO.selectUsedShoesByUserId(userId);
 	}
 	
-//	public int deleteShoes(int shoesId, int userId) {
-//		UsedShoes usedShoes = shoesDAO.selectUsedShoesForDetail(shoesId);
-//		FileManagerService.removeUsedShoesFile(usedShoes.getImagePath());
-//		return shoesDAO.deleteShoes(shoesId, userId);
-//	}
+	public int deleteShoes(int shoesId, int userId) {
+//파일삭제 추가하기
+		return shoesDAO.deleteShoes(shoesId, userId);
+	}
 	
 	public int soldOutShoes(int shoesId, int userId) {
 		return shoesDAO.soldOutShoes(shoesId, userId);

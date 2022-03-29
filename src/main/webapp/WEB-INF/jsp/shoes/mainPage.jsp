@@ -50,12 +50,22 @@
 			<span class="fw-bold fst-italic">Recently Added</span>
 			<br>
 			<span class="fst-italic">최근 등록 상품</span>
+			
 			<div class="scroll-wrap">
 				<div class="d-flex scroll-element">
+				
+				
+					<c:forEach var="inputFileList" items="${inputFileList}">
+						${inputFileList.imagePath}
+					</c:forEach>
+					
+					
 					<c:forEach var="UsedShoesList" items="${UsedShoesList}">
 						<div class="m-3">
 							<a href="/shoes/detail_view?UsedShoesListId=${UsedShoesList.id}">
-								<%--  <img src="${UsedShoesList.imagePath}" class="mainPageShoes-image"> --%>
+								
+								<%-- <img src="${inputFileList.createdAt}" class="mainPageShoes-image">  --%>
+								
 							</a>
 							
 							<br>

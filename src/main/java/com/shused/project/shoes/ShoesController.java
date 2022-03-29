@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shused.project.shoes.bo.ShoesBO;
 import com.shused.project.shoes.model.DroppedShoes;
+import com.shused.project.shoes.model.InputFile;
 import com.shused.project.shoes.model.UsedShoes;
 
 @Controller
@@ -29,6 +30,9 @@ public class ShoesController {
 		
 		List<UsedShoes> UsedShoesList = shoesBO.getUsedShoesList();
 		model.addAttribute("UsedShoesList", UsedShoesList);
+		
+		List<InputFile> inputFileList = shoesBO.getInputFileList();
+		model.addAttribute("inputFileList", inputFileList);
 		
 		return "/shoes/mainPage";
 	}

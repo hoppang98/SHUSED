@@ -76,7 +76,7 @@
 	
 	<insert id ="insertFileListForInsert" parameterType="com.shused.project.shoes.model.InputFile">
 	<!-- 파일 갯수만큼 반복문 돌리기 -->
-		<foreach collection="imagePath" item="item" separator=",">
+		
 			INSERT INTO `usedshoesimages`
 			(
 				`usedShoesId`
@@ -84,6 +84,7 @@
 				,`createdAt`
 			)
 			VALUES
+			<foreach collection="imagePath" item="item" separator=",">
 			(
 				#{usedShoesId}
 				,#{item}
@@ -98,6 +99,12 @@
 		FROM
 			`usedshoes`
 		ORDER BY `updatedAt` DESC
+	</select>
+	
+	<select id="selectInputFile" resultType="com.shused.project.shoes.model.InputFile">
+		SELECT *
+		FROM
+			`usedshoesimages`
 	</select>
 	
 	

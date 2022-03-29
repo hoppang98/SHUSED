@@ -69,6 +69,8 @@ public interface ShoesDAO {
 	
 	public List<UsedShoes> selectUsedShoes();
 	
+	public List<InputFile> selectInputFile();
+	
 	public UsedShoes selectUsedShoesForDetail (@Param("UsedShoesId") int UsedShoesId);
 
 	public List<UsedShoes> selectUsedShoesByUserId(@Param("userId") int UserId);

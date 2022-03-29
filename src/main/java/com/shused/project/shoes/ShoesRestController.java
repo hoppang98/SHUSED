@@ -1,6 +1,5 @@
 package com.shused.project.shoes;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,12 +73,11 @@ public class ShoesRestController {
 		String phoneNumber = (String)session.getAttribute("phoneNumber");
 		
 		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, fileList);
-		
-		
-		// 위 내용 저장과 동시에 판매 상품의 pk값 가져오는 방법 - useGeneratedKeys
-		
+		System.out.print(count);
+		int fileCount = fileList.size();
+		// 위 내용 저장과 동시에 판매 상품의 pk값 가져오는 방법 - useGeneratedKeys 사용
 		Map<String, String> result = new HashMap<>();
-		if(count == 1) {
+		if(count == fileCount) {
 			result.put("result", "success");
 		} else {
 			result.put("result", "fail");
@@ -89,25 +87,26 @@ public class ShoesRestController {
 	
 	
 	
-//	@GetMapping("/shoes/delete")
-//	public Map<String, String> deleteShoes(
-//			@RequestParam("shoesId") int shoesId,
-//			HttpServletRequest request
-//			){
-//		HttpSession session = request.getSession();
-//		
-//		int userId = (Integer)session.getAttribute("userId");
-//		
-//		//int count = shoesBO.deleteShoes(shoesId, userId);
-//		Map<String, String> result = new HashMap<>();
-//		
-//		if(count == 1) {
-//			result.put("result", "success");
-//		} else {
-//			result.put("result", "fail");
-//		}
-//		return result;
-//	}
+	@GetMapping("/shoes/delete")
+	public Map<String, String> deleteShoes(
+			@RequestParam("shoesId") int shoesId,
+			HttpServletRequest request
+			){
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = shoesBO.deleteShoes(shoesId, userId);
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		return result;
+	}
+	
 	
 	@PostMapping("/shoes/soldOut")
 	public Map<String, String> soldOut(
