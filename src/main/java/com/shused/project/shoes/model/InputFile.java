@@ -1,14 +1,12 @@
 package com.shused.project.shoes.model;
 
 import java.util.Date;
-import java.util.List;
 
 public class InputFile {
 	public int id;
 	public int usedShoesId;
-	public List<String> imagePath;
+	public String imagePath;
 	public Date createdAt;
-	
 	public int getId() {
 		return id;
 	}
@@ -21,10 +19,10 @@ public class InputFile {
 	public void setUsedShoesId(int usedShoesId) {
 		this.usedShoesId = usedShoesId;
 	}
-	public List<String> getImagePath() {
+	public String getImagePath() {
 		return imagePath;
 	}
-	public void setImagePath(List<String> imagePath) {
+	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
 	public Date getCreatedAt() {
@@ -33,6 +31,8 @@ public class InputFile {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+
 	
 	
 }

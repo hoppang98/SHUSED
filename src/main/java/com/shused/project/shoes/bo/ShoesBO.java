@@ -52,12 +52,18 @@ public class ShoesBO {
 		shoesDAO.insertUsedShoes(usedShoes);
 		
 		List<String> fileListForInsert = FileManagerService.saveUsedShoesFile(userId, fileList);
-		InputFile inputfile;
-		inputfile = new InputFile();
-		inputfile.setUsedShoesId(usedShoes.getId());
-		inputfile.setImagePath(fileListForInsert);
+		String List[] = fileListForInsert.toArray(new String[fileListForInsert.size()]);
 		
-		return shoesDAO.insertFileListForInsert(inputfile);
+		for(int i = 0; i <= List.length; i++) {
+			InputFile inputfile;
+			inputfile = new InputFile();
+			inputfile.setUsedShoesId(usedShoes.getId());
+			inputfile.setImagePath(List[i]);
+			return shoesDAO.insertFileListForInsert(inputfile);
+		}
+		
+		return shoesDAO.insertUsedShoes(usedShoes);
+		
 	} 
 	
 	//public List<String> addFilePath(int userId, List<MultipartFile> fileList) {

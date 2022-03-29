@@ -56,7 +56,7 @@
 				
 				
 					<c:forEach var="inputFileList" items="${inputFileList}">
-						${inputFileList.imagePath}
+						<img src="${inputFileList.imagePath}" class="mainPageShoes-image">
 					</c:forEach>
 					
 					
