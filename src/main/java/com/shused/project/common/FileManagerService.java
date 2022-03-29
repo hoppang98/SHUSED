@@ -104,7 +104,6 @@ public class FileManagerService {
 		
 		List<String> realFilePath = new ArrayList<String>();
 		
-		
 		File directiory = new File(filePath);
 		if (directiory.mkdir() == false) {
 			return null;
@@ -113,26 +112,19 @@ public class FileManagerService {
 		
 		for(MultipartFile file : fileList) {
 
-			
-			
 				byte[] bytes;
-				
-				
 				try {
 					bytes = file.getBytes();
 					Path path = Paths.get(filePath + file.getOriginalFilename());
 					Files.write(path, bytes);
 					logger.info("/usedShoesImages/" + directioryName + file.getOriginalFilename());
 					String realPath = "/usedShoesImages/" + directioryName + file.getOriginalFilename();
-					realFilePath.add(realPath);
-					
-					
+					realFilePath.add(realPath);	
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 			}	
-		
 			return realFilePath; // 이렇게 완성, 이후 dao나 mapper에서 반복문을 돌려서 저장한다
 		}
 
