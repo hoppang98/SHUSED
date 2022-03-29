@@ -35,6 +35,13 @@
 		ORDER BY `createdAt` DESC
 	</select>
 	
+	<select id="selectInputFileList" resultType="com.shused.project.shoes.model.SelectInputFile">
+		SELECT *
+		FROM
+			`usedshoesimages`
+		GROUP BY `usedShoesId`
+	</select>
+	
 	<insert id="insertUsedShoes" parameterType="com.shused.project.shoes.model.UsedShoes" useGeneratedKeys="true" keyProperty="id">
 			INSERT INTO `usedshoes`
 		(
@@ -76,7 +83,6 @@
 	
 	<insert id ="insertFileListForInsert" parameterType="com.shused.project.shoes.model.InputFile">
 	<!-- 파일 갯수만큼 반복문 돌리기 -->
-		
 			INSERT INTO `usedshoesimages`
 			(
 				`usedShoesId`
@@ -116,6 +122,15 @@
 			`id` = #{UsedShoesId} <!-- 위의 id값과 dao에서 보내온 postId가 일치하는 메모만 가져온다 -->
 	</select>
 	
+	<select id="SelectInputFileForDetail" resultType="com.shused.project.shoes.model.SelectInputFile" parameterType="int">
+		SELECT *
+		FROM
+			`usedshoesimages`
+		WHERE
+			`usedShoesId` = #{UsedShoesId}
+	</select>
+	
+	
 	<select id="selectUsedShoesByUserId" resultType="com.shused.project.shoes.model.UsedShoes" parameterType="int">
 		SELECT *
 		FROM
@@ -130,6 +145,23 @@
 			`id` = #{shoesId}
 			AND `userId` = #{userId}
 	</delete>
+	
+	<delete id="deleteShoesImages" parameterType="int">
+		DELETE FROM `usedshoesimages`
+		WHERE
+			`usedShoesId` = #{shoesId}
+	</delete>
+	
+	
+	<select id="selectDeleteFilePath" resultType="List">
+		SELECT *
+		FROM
+			`usedshoesimages`
+		WHERE
+			`usedShoesId` = #{shoesId}
+	</select>
+	
+	
 	
 	<update id="soldOutShoes" parameterType="map">
 		UPDATE `usedshoes`

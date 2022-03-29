@@ -6,11 +6,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.shused.project.shoes.model.SelectInputFile;
 
 public class FileManagerService {
 
@@ -133,33 +136,36 @@ public class FileManagerService {
 		
 	
 	// 판매 신발 파일 삭제
-	public static void removeUsedShoesFile(String filePath) {
+	public static void removeUsedShoesFile(List<String> filePath) {
+		
 		if(filePath == null) {
 			logger.error("FileManagerService::removeFile - 삭제할 파일 없음");
 			return;
 		}
-
-		String realFilePath = USED_SHOES_FILE_UPLOAD_PATH + filePath.replace("/usedShoesImages/", "");
-
-		Path path = Paths.get(realFilePath);
-
-		if (Files.exists(path)) {
-			try {
-				Files.delete(path);
-			} catch (IOException e) {
-				logger.error("FileManagerService::removeFile - 파일 삭제 실패");
-				e.printStackTrace();
+		
+		int filePathListSize = filePath.size();
+		String fileArr[] = filePath.toArray(new String[filePathListSize]);
+		
+		for (int i = 0; i <= fileArr.length; i++) {
+			String realFilePath = USED_SHOES_FILE_UPLOAD_PATH + fileArr[i].replace("/usedShoesImages/", "");
+			Path path = Paths.get(realFilePath);
+			if (Files.exists(path)) {
+				try {
+					Files.delete(path);
+				} catch (IOException e) {
+					logger.error("FileManagerService::removeFile - 파일 삭제 실패");
+					e.printStackTrace();
+				}
 			}
-		}
-
-		path = path.getParent();
-
-		if (Files.exists(path)) {
-			try {
-				Files.delete(path);
-			} catch (IOException e) {
-				logger.error("FileManagerService::removeFile - 디렉토리 삭제 실패");
-				e.printStackTrace();
+			
+			path = path.getParent();
+			if (Files.exists(path)) {
+				try {
+					Files.delete(path);
+				} catch (IOException e) {
+					logger.error("FileManagerService::removeFile - 디렉토리 삭제 실패");
+					e.printStackTrace();
+				}
 			}
 		}
 	}

@@ -10,6 +10,7 @@ import com.shused.project.common.FileManagerService;
 import com.shused.project.shoes.dao.ShoesDAO;
 import com.shused.project.shoes.model.DroppedShoes;
 import com.shused.project.shoes.model.InputFile;
+import com.shused.project.shoes.model.SelectInputFile;
 import com.shused.project.shoes.model.UsedShoes;
 
 @Service
@@ -28,11 +29,16 @@ public class ShoesBO {
 		return shoesDAO.selectDroppesShoes();
 	}
 	
+	
+	public List<SelectInputFile> getInputFileList(){
+		return shoesDAO.selectInputFileList();
+
+	}
+	
 
 	
 	
 	public int addUsedShoes(int userId, String nickname, String phoneNumber, String category, String modelNumber, String shoesName, int size, int price, String condition, String dealMethod, String explanation, boolean state, String place, List<MultipartFile> fileList) {
-		
 		UsedShoes usedShoes;
 		usedShoes = new UsedShoes();
 		usedShoes.setUserId(userId);
@@ -52,18 +58,12 @@ public class ShoesBO {
 		shoesDAO.insertUsedShoes(usedShoes);
 		
 		List<String> fileListForInsert = FileManagerService.saveUsedShoesFile(userId, fileList);
-		String List[] = fileListForInsert.toArray(new String[fileListForInsert.size()]);
+		InputFile inputfile;
+		inputfile = new InputFile();
+		inputfile.setUsedShoesId(usedShoes.getId());
+		inputfile.setImagePath(fileListForInsert);
 		
-		for(int i = 0; i <= List.length; i++) {
-			InputFile inputfile;
-			inputfile = new InputFile();
-			inputfile.setUsedShoesId(usedShoes.getId());
-			inputfile.setImagePath(List[i]);
-			return shoesDAO.insertFileListForInsert(inputfile);
-		}
-		
-		return shoesDAO.insertUsedShoes(usedShoes);
-		
+		return shoesDAO.insertFileListForInsert(inputfile);
 	} 
 	
 	//public List<String> addFilePath(int userId, List<MultipartFile> fileList) {
@@ -76,29 +76,53 @@ public class ShoesBO {
 		return shoesDAO.selectUsedShoes();
 	}
 	
-	public List<InputFile> getInputFileList() {
-		return shoesDAO.selectInputFile();
-	}
+	
 	
 	public UsedShoes getUsedShoesForDetail (int UsedShoesId) {
 		return shoesDAO.selectUsedShoesForDetail(UsedShoesId);
 	}
+	public List<SelectInputFile> SelectInputFileForDetail (int UsedShoesId) {
+		return shoesDAO.SelectInputFileForDetail(UsedShoesId);
+	}
+	
+	
 	
 	public List<UsedShoes> getUsedShoesListByUserId(int userId) {
 		return shoesDAO.selectUsedShoesByUserId(userId);
 	}
 	
+	
+	
+	
 	public int deleteShoes(int shoesId, int userId) {
-//파일삭제 추가하기
+		
+		List<String> filePath = shoesDAO.selectDeleteFilePath(shoesId);
+		FileManagerService.removeUsedShoesFile(filePath);
+		
+
+		if (shoesDAO.deleteShoes(shoesId, userId) == 1) {
+			shoesDAO.deleteShoes(shoesId, userId);
+			shoesDAO.deleteFilePath(shoesId);
+		}
 		return shoesDAO.deleteShoes(shoesId, userId);
 	}
+	
+	
+	
+	
 	
 	public int soldOutShoes(int shoesId, int userId) {
 		return shoesDAO.soldOutShoes(shoesId, userId);
 	}
 	
-	public List<UsedShoes> getUsedShoesListForSearch (String searchKeyword){
+	public List<UsedShoes> getUsedShoesListForSearch (String searchKeyword){	
 		return shoesDAO.selectUsedShoesForSearch(searchKeyword);
+	}
+	
+	
+	public List<SelectInputFile> getInputFileListForSearch(){
+		return shoesDAO.selectInputFileList();
+
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.shused.project.community.bo.CommunityBO;
 import com.shused.project.community.model.Post;
 import com.shused.project.shoes.bo.ShoesBO;
+import com.shused.project.shoes.model.SelectInputFile;
 import com.shused.project.shoes.model.UsedShoes;
 
 @Controller
@@ -65,6 +66,8 @@ public class UserController {
 		List<Post> myPostlist = communityBO.getPostByUserId(userId);
 		model.addAttribute("myPostlist",myPostlist);
 		
+		List<SelectInputFile> SelectInputFileListForMypage = shoesBO.getInputFileListForSearch();
+		model.addAttribute("SelectInputFileListForMypage", SelectInputFileListForMypage);
 		
 		return "/user/mypage";
 	}

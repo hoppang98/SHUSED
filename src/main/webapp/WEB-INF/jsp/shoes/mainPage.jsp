@@ -55,17 +55,17 @@
 				<div class="d-flex scroll-element">
 				
 				
-					<c:forEach var="inputFileList" items="${inputFileList}">
-						<img src="${inputFileList.imagePath}" class="mainPageShoes-image">
-					</c:forEach>
 					
+				
 					
 					<c:forEach var="UsedShoesList" items="${UsedShoesList}">
 						<div class="m-3">
 							<a href="/shoes/detail_view?UsedShoesListId=${UsedShoesList.id}">
-								
-								<%-- <img src="${inputFileList.createdAt}" class="mainPageShoes-image">  --%>
-								
+								<c:forEach var="SelectInputFileList" items="${SelectInputFileList}">
+									<c:if test="${SelectInputFileList.usedShoesId eq UsedShoesList.id}">
+										<img src="${SelectInputFileList.imagePath}" class="mainPageShoes-image img-thumbnail"><br>
+									</c:if>
+								</c:forEach>
 							</a>
 							
 							<br>

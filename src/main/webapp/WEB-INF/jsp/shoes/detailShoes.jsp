@@ -102,7 +102,10 @@
 			<hr>
 			<div class="d-flex justify-content-center fs-2 fw-bold p-1">상품이미지</div>
 
-			<img src="${usedShoes.imagePath}" class="mainPageShoes-image">
+			<c:forEach var="selectInputFile" items="${selectInputFile}">
+				<img src="${selectInputFile.imagePath}" class="mainPageShoes-image">
+			</c:forEach>
+			
 			<hr>
 			
 			<c:choose>

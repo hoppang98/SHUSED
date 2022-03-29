@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.shused.project.shoes.model.DroppedShoes;
 import com.shused.project.shoes.model.InputFile;
+import com.shused.project.shoes.model.SelectInputFile;
 import com.shused.project.shoes.model.UsedShoes;
 
 @Repository
@@ -27,7 +28,7 @@ public interface ShoesDAO {
 	
 	public List<DroppedShoes> selectDroppesShoes();
 	
-	
+	public List<SelectInputFile> selectInputFileList();
 	
 	
 	
@@ -72,12 +73,22 @@ public interface ShoesDAO {
 	public List<InputFile> selectInputFile();
 	
 	public UsedShoes selectUsedShoesForDetail (@Param("UsedShoesId") int UsedShoesId);
-
+	public List<SelectInputFile> SelectInputFileForDetail (@Param("UsedShoesId") int UsedShoesId);
+	
+	
 	public List<UsedShoes> selectUsedShoesByUserId(@Param("userId") int UserId);
 	
 	public int deleteShoes(
 			@Param("shoesId") int shoesId,
 			@Param("userId") int userId
+			);
+	
+	public int deleteFilePath(
+			@Param("shoesId") int shoesId
+			);
+	
+	public List<String> selectDeleteFilePath (
+			@Param("shoesId") int shoesId
 			);
 	
 	public int soldOutShoes(
