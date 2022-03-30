@@ -15,7 +15,7 @@ public class UserBO {
 	
 	// 회원가입
 	public int addUser(String loginId, String password, String nickname, String phoneNumber) {
-		String encPassword = EncryptUtils.md5(phoneNumber);
+		String encPassword = EncryptUtils.md5(password);
 		
 		return userDAO.insertUser(loginId, encPassword, nickname, phoneNumber);
 	}
