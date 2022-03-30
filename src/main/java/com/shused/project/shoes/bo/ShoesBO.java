@@ -96,14 +96,14 @@ public class ShoesBO {
 	
 	public int deleteShoes(int shoesId, int userId) {
 		
-		List<String> filePath = shoesDAO.selectDeleteFilePath(shoesId);
-		FileManagerService.removeUsedShoesFile(filePath);
+		//List<String> filePath = shoesDAO.selectDeleteFilePath(shoesId);
+		//FileManagerService.removeUsedShoesFile(filePath);
 		
 
-		if (shoesDAO.deleteShoes(shoesId, userId) == 1) {
-			shoesDAO.deleteShoes(shoesId, userId);
-			shoesDAO.deleteFilePath(shoesId);
-		}
+//		if (shoesDAO.deleteShoes(shoesId, userId) == 1) {
+//			shoesDAO.deleteShoes(shoesId, userId);
+//			shoesDAO.deleteFilePath(shoesId);
+//		}
 		return shoesDAO.deleteShoes(shoesId, userId);
 	}
 	

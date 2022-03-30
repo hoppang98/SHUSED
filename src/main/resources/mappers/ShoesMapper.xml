@@ -146,7 +146,7 @@
 			AND `userId` = #{userId}
 	</delete>
 	
-	<delete id="deleteShoesImages" parameterType="int">
+	<delete id="deleteFilePath" parameterType="int">
 		DELETE FROM `usedshoesimages`
 		WHERE
 			`usedShoesId` = #{shoesId}
