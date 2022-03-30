@@ -35,7 +35,18 @@
 		ORDER BY `createdAt` DESC
 	</select>
 	
-	<insert id="insertUsedShoes" parameterType="com.shused.project.shoes.model.UsedShoes" useGeneratedKeys="true" keyProperty="usedShoesId">
+	<select id="selectInputFileList" resultType="com.shused.project.shoes.model.SelectInputFile">
+		SELECT 
+			ANY_VALUE(id) AS id,
+			ANY_VALUE(usedShoesId) AS usedShoesId,
+			ANY_VALUE(imagePath) AS imagePath,
+			ANY_VALUE(createdAt) AS createdAt
+		FROM
+			`usedshoesimages`
+		GROUP BY `usedShoesId`
+	</select>
+	
+	<insert id="insertUsedShoes" parameterType="com.shused.project.shoes.model.UsedShoes" useGeneratedKeys="true" keyProperty="id">
 			INSERT INTO `usedshoes`
 		(
 			`userId`
@@ -74,18 +85,22 @@
 		)
 	</insert>
 	
-	<insert id ="insertFilePath" parameterType="map">
-		INSERT INTO `usedshoesimages`
-		(
-			`userId`
-			,`createdAt`
-		)
-		VALUES
-		(
-			#{userId}
-			,#{imagePath}
-			,now()
-		)
+	<insert id ="insertFileListForInsert" parameterType="com.shused.project.shoes.model.InputFile">
+	<!-- 파일 갯수만큼 반복문 돌리기 -->
+			INSERT INTO `usedshoesimages`
+			(
+				`usedShoesId`
+				,`imagePath`
+				,`createdAt`
+			)
+			VALUES
+			<foreach collection="imagePath" item="item" separator=",">
+			(
+				#{usedShoesId}
+				,#{item}
+				,now()
+			)
+			</foreach>
 	</insert>
 	
 	
@@ -96,6 +111,12 @@
 		ORDER BY `updatedAt` DESC
 	</select>
 	
+	<select id="selectInputFile" resultType="com.shused.project.shoes.model.InputFile">
+		SELECT *
+		FROM
+			`usedshoesimages`
+	</select>
+	
 	
 	<select id="selectUsedShoesForDetail" resultType="com.shused.project.shoes.model.UsedShoes" parameterType="int">
 		SELECT *
@@ -104,6 +125,15 @@
 		WHERE
 			`id` = #{UsedShoesId} <!-- 위의 id값과 dao에서 보내온 postId가 일치하는 메모만 가져온다 -->
 	</select>
+	
+	<select id="SelectInputFileForDetail" resultType="com.shused.project.shoes.model.SelectInputFile" parameterType="int">
+		SELECT *
+		FROM
+			`usedshoesimages`
+		WHERE
+			`usedShoesId` = #{UsedShoesId}
+	</select>
+	
 	
 	<select id="selectUsedShoesByUserId" resultType="com.shused.project.shoes.model.UsedShoes" parameterType="int">
 		SELECT *
@@ -119,6 +149,23 @@
 			`id` = #{shoesId}
 			AND `userId` = #{userId}
 	</delete>
+	
+	<delete id="deleteFilePath" parameterType="int">
+		DELETE FROM `usedshoesimages`
+		WHERE
+			`usedShoesId` = #{shoesId}
+	</delete>
+	
+	
+	<select id="selectDeleteFilePath" resultType="List">
+		SELECT *
+		FROM
+			`usedshoesimages`
+		WHERE
+			`usedShoesId` = #{shoesId}
+	</select>
+	
+	
 	
 	<update id="soldOutShoes" parameterType="map">
 		UPDATE `usedshoes`

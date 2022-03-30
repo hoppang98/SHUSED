@@ -1,6 +1,5 @@
 package com.shused.project.shoes;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +48,9 @@ public class ShoesRestController {
 		return result;
 	}
 	
-	// 최근 등록 상품 저장 api
+	
+	
+	// 판매 신발 저장 api
 	@PostMapping("/shoes/usedShoes")
 	public Map<String, String> usedShoes (
 			@RequestParam("category") String category,
@@ -72,18 +73,19 @@ public class ShoesRestController {
 		String phoneNumber = (String)session.getAttribute("phoneNumber");
 		
 		int count = shoesBO.addUsedShoes(userId, nickname, phoneNumber, category, modelNumber, shoesName, size, price, condition, dealMethod, explanation, state, place, fileList);
-		
-		// 위 내용 저장과 동시에 판매 상품의 pk값 가져오는 방법 - useGeneratedKeys
-		//int count2 = shoesBO.addFilePath(userId, fileList);
-		
+		System.out.print(count);
+		int fileCount = fileList.size();
+		// 위 내용 저장과 동시에 판매 상품의 pk값 가져오는 방법 - useGeneratedKeys 사용
 		Map<String, String> result = new HashMap<>();
-		if(count == 1) {
+		if(count == fileCount) {
 			result.put("result", "success");
 		} else {
 			result.put("result", "fail");
 		}
 		return result;
 	}
+	
+	
 	
 	@GetMapping("/shoes/delete")
 	public Map<String, String> deleteShoes(
@@ -104,6 +106,7 @@ public class ShoesRestController {
 		}
 		return result;
 	}
+	
 	
 	@PostMapping("/shoes/soldOut")
 	public Map<String, String> soldOut(

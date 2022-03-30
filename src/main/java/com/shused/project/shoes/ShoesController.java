@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shused.project.shoes.bo.ShoesBO;
 import com.shused.project.shoes.model.DroppedShoes;
+import com.shused.project.shoes.model.SelectInputFile;
 import com.shused.project.shoes.model.UsedShoes;
 
 @Controller
@@ -29,6 +30,9 @@ public class ShoesController {
 		
 		List<UsedShoes> UsedShoesList = shoesBO.getUsedShoesList();
 		model.addAttribute("UsedShoesList", UsedShoesList);
+		
+		List<SelectInputFile> SelectInputFileList = shoesBO.getInputFileList();
+		model.addAttribute("SelectInputFileList", SelectInputFileList);
 		
 		return "/shoes/mainPage";
 	}
@@ -53,8 +57,9 @@ public class ShoesController {
 			Model model
 			) {
 		
+		List<SelectInputFile> selectInputFile = shoesBO.SelectInputFileForDetail(UsedShoesId);
+		model.addAttribute("selectInputFile", selectInputFile);
 		UsedShoes usedShoes = shoesBO.getUsedShoesForDetail(UsedShoesId);
-		
 		model.addAttribute("usedShoes", usedShoes);
 		
 		return "/shoes/detailShoes";
@@ -70,6 +75,9 @@ public class ShoesController {
 		model.addAttribute("usedShoesSearchList", usedShoesSearchList);
 		
 		model.addAttribute("searchKeyword", searchKeyword);
+		
+		List<SelectInputFile> SelectInputFileListForSearch = shoesBO.getInputFileListForSearch();
+		model.addAttribute("SelectInputFileListForSearch", SelectInputFileListForSearch);
 		
 		return "/shoes/searchShoes";
 	}

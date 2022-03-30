@@ -10,6 +10,7 @@ public class User {
 	private String phoneNumber;
 	private Date createdAt;
 	private Date updatedAt;
+	
 	public int getId() {
 		return id;
 	}

@@ -19,11 +19,25 @@ public class WebMVCConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/recentlyDroppedImages/**") // 클라이언트에서 접근하도록 하는 path
-		.addResourceLocations("file:/" + FileManagerService.RECTNTLY_DROPPED_FILE_UPLOAD_PATH); // RECTNTLY_DROPPED_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+		.addResourceLocations("file:///" + FileManagerService.RECTNTLY_DROPPED_FILE_UPLOAD_PATH); // RECTNTLY_DROPPED_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
 		registry.addResourceHandler("/usedShoesImages/**") // 클라이언트에서 접근하도록 하는 path
-		.addResourceLocations("file:/" + FileManagerService.USED_SHOES_FILE_UPLOAD_PATH); // USED_SHOES_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+		.addResourceLocations("file:///" + FileManagerService.USED_SHOES_FILE_UPLOAD_PATH); // USED_SHOES_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
 		registry.addResourceHandler("/communityImages/**") // 클라이언트에서 접근하도록 하는 path
-		.addResourceLocations("file:/" + FileManagerService.COMMUNITY_FILE_UPLOAD_PATH); // COMMUNITY_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+		.addResourceLocations("file:///" + FileManagerService.COMMUNITY_FILE_UPLOAD_PATH); // COMMUNITY_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+
+		//.addResourceLocations("file:///" + FileManagerService.COMMUNITY_FILE_UPLOAD_PATH); // COMMUNITY_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+
+		
+// 배포시 아래쪽으로 변경	
+//		registry.addResourceHandler("/recentlyDroppedImages/**") // 클라이언트에서 접근하도록 하는 path
+//		.addResourceLocations("file:/" + FileManagerService.RECTNTLY_DROPPED_FILE_UPLOAD_PATH); // RECTNTLY_DROPPED_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+//		registry.addResourceHandler("/usedShoesImages/**") // 클라이언트에서 접근하도록 하는 path
+//		.addResourceLocations("file:/" + FileManagerService.USED_SHOES_FILE_UPLOAD_PATH); // USED_SHOES_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+//		registry.addResourceHandler("/communityImages/**") // 클라이언트에서 접근하도록 하는 path
+//		.addResourceLocations("file:/" + FileManagerService.COMMUNITY_FILE_UPLOAD_PATH); // COMMUNITY_FILE_UPLOAD_PATH 경로 아래에 있는 모든 파일
+
+		
+
 	}
 	
 	@Override

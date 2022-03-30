@@ -28,7 +28,7 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<div class="mt-4 ms-4">
-			<span class="fs-3 fw-bold">발매정보</span>
+			<span class="fs-3 fw-bold">판매물품 등록</span>
 			<hr>
 			<span class="fs-5 fw-bold">카테고리</span>
 	

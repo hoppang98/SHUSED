@@ -39,7 +39,11 @@
 					<div class="scroll-element">
 						<div class="card" style="width:260px;">
 							<a href="/shoes/detail_view?UsedShoesListId=${usedShoesSearchList.id}">
-								<img src="${usedShoesSearchList.imagePath}" class="card-img-top" style="height: 200px;">
+							<c:forEach var="SelectInputFileListForSearch" items="${SelectInputFileListForSearch}">
+								<c:if test="${SelectInputFileListForSearch.usedShoesId eq usedShoesSearchList.id}">
+										<img src="${SelectInputFileListForSearch.imagePath}" class="card-img-top" style="height: 200px;">
+								</c:if>
+							</c:forEach>
 							</a>
 							<div class="card-body">
 								<h5 class="card-title">판매 ID : ${usedShoesSearchList.id}</h5>
