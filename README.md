@@ -2,7 +2,7 @@
 중고 신발 거래 플랫폼 SHUSED <br>
 http://13.124.5.182:8080/user/signin_view
 
-테스트용 ID : qwer1234
+테스트용 ID : qwer1234 <br>
 테스트용 PW : qwer1234
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
